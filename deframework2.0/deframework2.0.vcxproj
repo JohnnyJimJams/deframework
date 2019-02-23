@@ -128,10 +128,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Editor\src\Console.cpp" />
     <ClCompile Include="..\Editor\src\Editor.cpp" />
     <ClCompile Include="..\Editor\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Editor\src\Console.h" />
     <ClInclude Include="..\Editor\src\Editor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

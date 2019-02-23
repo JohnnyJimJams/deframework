@@ -1,0 +1,21 @@
+Done!
+=====
+GLFW
+Editor Class
+Windows App
+AntTweakBar integrate
+Accept Editor resolution from WinMain, create accessors
+Console write, Scroll, select for copy
+
+TODO!
+=====
+Integrate FMod (?  statically linked?, alternatives?)
+Load music
+Play Demo (Add Toolbar window)
+Add timeline Window
+Scrub Demo
+Zoom timeline Window
+Scroll timeline Window
+Save function
+Load function
+Build function?

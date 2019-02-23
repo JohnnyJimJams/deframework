@@ -1,7 +1,9 @@
 #include "Editor.h"
 
-Editor::Editor()
+Editor::Editor(unsigned int width, unsigned int height)
 {
+	m_width = width;
+	m_height = height;
 }
 
 Editor::~Editor()
@@ -17,7 +19,7 @@ void Editor::Start()
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-	m_window = glfwCreateWindow(1280, 960, "Defame Editor", NULL, NULL);
+	m_window = glfwCreateWindow(m_width, m_height, "Defame Editor", NULL, NULL);
 	if (!m_window)
 	{
 		glfwTerminate();
@@ -27,13 +29,15 @@ void Editor::Start()
 	glfwMakeContextCurrent(m_window);
 	glfwSwapInterval(1);
 
-	int width, height;
-	glfwGetFramebufferSize(m_window, &width, &height);
-
+	// AntTweakBar Init
 	TwInit(TW_OPENGL, NULL);
-	TwWindowSize(width, height);
+	TwWindowSize(m_width, m_height);
+	TwDefine(" GLOBAL buttonalign=left ");
+	TwDefine(" GLOBAL contained=true ");
+	TwDefine(" GLOBAL fontsize=3 ");
+	TwDefine(" GLOBAL fontstyle=fixed ");
 
-	Console = TwNewBar("Console");
+	m_console = new Console(this);
 
 	glfwSetKeyCallback(m_window, glfw_key_callback);
 	glfwSetCharCallback(m_window, glfw_char_callback);
@@ -41,11 +45,13 @@ void Editor::Start()
 	glfwSetCursorPosCallback(m_window, glfw_mousepos_callback);
 	glfwSetScrollCallback(m_window, glfw_mousewheel_callback);
 	
+	m_console->Log("Start main loop..");
+
 	// Editor Main loop!
 	while (!glfwWindowShouldClose(m_window))
 	{
-		glfwGetFramebufferSize(m_window, &width, &height);
-		glViewport(0, 0, width, height);
+		glViewport(0, 0, m_width, m_height);
+		glClearColor(m_backgroundColor[0], m_backgroundColor[1], m_backgroundColor[2], 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		TwDraw();
@@ -54,6 +60,23 @@ void Editor::Start()
 		glfwPollEvents();
 	}
 	glfwDestroyWindow(m_window);
+}
+
+void Editor::SetBackgroundColor(float r, float g, float b)
+{
+	m_backgroundColor[0] = r;
+	m_backgroundColor[1] = g;
+	m_backgroundColor[2] = b;
+}
+
+unsigned int Editor::GetWidth()
+{
+	return m_width;
+}
+
+unsigned int Editor::GetHeight()
+{
+	return m_height;
 }
 
 void Editor::glfw_error_callback(int error, const char * description)
