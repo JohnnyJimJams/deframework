@@ -29,6 +29,11 @@ void Editor::Start()
 	glfwMakeContextCurrent(m_window);
 	glfwSwapInterval(1);
 
+	// Audio!
+	audio = new Mp3();
+	audio->Load(L"C:\\Users\\Alienware\\Desktop\\Demoscene\\deframework2_demoExample\\sample_orig.mp3");
+	audio->Play();
+
 	// AntTweakBar Init
 	TwInit(TW_OPENGL, NULL);
 	TwWindowSize(m_width, m_height);
