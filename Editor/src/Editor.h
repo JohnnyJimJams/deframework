@@ -1,7 +1,11 @@
 #pragma once
 #include "MP3.h"
 #include "Console.h"
+#include "Toolbar.h"
+#include "Timeline.h"
 #include <GLFW/glfw3.h>
+
+enum EditorMode { Edit, Play };
 
 class Editor
 {
@@ -13,13 +17,20 @@ public:
 	void SetBackgroundColor(float r, float g, float b);
 	unsigned int GetWidth();
 	unsigned int GetHeight();
+	void Play();
+	void Stop();
+	Console * GetConsole();
+
 private:
 	GLFWwindow* m_window;
 	Console *m_console;
+	Toolbar *m_toolbar;
+	Timeline *m_timeline;
 	unsigned int m_width;
 	unsigned int m_height;
 	GLfloat m_backgroundColor[3] = { 0, 0, 0 };
 	Mp3 *audio;
+	EditorMode m_mode;
 	
 	static void glfw_error_callback(int error, const char* description);
 	static void glfw_key_callback(GLFWwindow * window, int key, int scancode, int action, int mods);

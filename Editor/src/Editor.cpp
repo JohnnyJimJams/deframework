@@ -4,6 +4,8 @@ Editor::Editor(unsigned int width, unsigned int height)
 {
 	m_width = width;
 	m_height = height;
+
+	m_mode = EditorMode::Edit;
 }
 
 Editor::~Editor()
@@ -32,17 +34,10 @@ void Editor::Start()
 	// Audio!
 	audio = new Mp3();
 	audio->Load(L"C:\\Users\\Alienware\\Desktop\\Demoscene\\deframework2_demoExample\\sample_orig.mp3");
-	audio->Play();
-
-	// AntTweakBar Init
-	TwInit(TW_OPENGL, NULL);
-	TwWindowSize(m_width, m_height);
-	TwDefine(" GLOBAL buttonalign=left ");
-	TwDefine(" GLOBAL contained=true ");
-	TwDefine(" GLOBAL fontsize=3 ");
-	TwDefine(" GLOBAL fontstyle=fixed ");
 
 	m_console = new Console(this);
+	m_toolbar = new Toolbar(this);
+	m_timeline = new Timeline(this);
 
 	glfwSetKeyCallback(m_window, glfw_key_callback);
 	glfwSetCharCallback(m_window, glfw_char_callback);
@@ -59,7 +54,7 @@ void Editor::Start()
 		glClearColor(m_backgroundColor[0], m_backgroundColor[1], m_backgroundColor[2], 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-		TwDraw();
+		m_timeline->DrawBar();
 
 		glfwSwapBuffers(m_window);
 		glfwPollEvents();
@@ -84,6 +79,41 @@ unsigned int Editor::GetHeight()
 	return m_height;
 }
 
+void Editor::Play()
+{
+	if (m_mode == EditorMode::Play)
+	{
+		__int64 start = 0;
+		__int64 end = audio->GetDuration();
+
+		audio->SetPositions(&start, &end, true);
+		//audio->Play();
+		return;
+	}
+	if ( m_mode == EditorMode::Edit)
+	{
+		m_mode = EditorMode::Play;
+		audio->Play();
+		return;
+	}
+}
+
+void Editor::Stop()
+{
+	if (m_mode == EditorMode::Play)
+	{
+		m_mode = EditorMode::Edit;
+		audio->Stop();
+		return;
+	}
+}
+
+Console * Editor::GetConsole()
+{
+	return m_console;
+}
+
+
 void Editor::glfw_error_callback(int error, const char * description)
 {
 }
@@ -92,26 +122,20 @@ void Editor::glfw_key_callback(GLFWwindow* window, int key, int scancode, int ac
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
-
-	TwEventKeyGLFW(key, action);
 }
 
 void Editor::glfw_char_callback(GLFWwindow * window, unsigned int codepoint)
 {
-	TwEventCharGLFW(codepoint, GLFW_PRESS);
 }
 
 void Editor::glfw_mousebutton_callback(GLFWwindow * window, int button, int action, int mods)
 {
-	TwEventMouseButtonGLFW(button, action);
 }
 
 void Editor::glfw_mousepos_callback(GLFWwindow * window, double xpos, double ypos)
 {
-	TwEventMousePosGLFW((int)xpos, (int)ypos);
 }
 
 void Editor::glfw_mousewheel_callback(GLFWwindow * window, double xoffset, double yoffset)
 {
-	TwEventMouseWheelGLFW((int)yoffset);
 }
