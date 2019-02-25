@@ -1,8 +1,13 @@
 #pragma once
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw.h"
+#include "imgui/imgui_impl_opengl3.h"
+#include <stdio.h>
 #include "MP3.h"
 #include "Console.h"
 #include "Toolbar.h"
 #include "Timeline.h"
+#include <GL/gl3w.h>    // Initialize with gl3wInit()
 #include <GLFW/glfw3.h>
 
 enum EditorMode { Edit, Play };

@@ -31,6 +31,9 @@ void Editor::Start()
 	glfwMakeContextCurrent(m_window);
 	glfwSwapInterval(1);
 
+	// OpenGL loader
+	gl3wInit();
+
 	// Audio!
 	audio = new Mp3();
 	audio->Load(L"C:\\Users\\Alienware\\Desktop\\Demoscene\\deframework2_demoExample\\sample_orig.mp3");
@@ -47,18 +50,49 @@ void Editor::Start()
 	
 	m_console->Log("Start main loop..");
 
+	// Setup Dear ImGui context
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;   // Enable Gamepad Controls
+
+	// Setup Dear ImGui style
+	ImGui::StyleColorsDark();
+	//ImGui::StyleColorsClassic();
+
+	// Setup Platform/Renderer bindings
+	ImGui_ImplGlfw_InitForOpenGL(m_window, true);
+	const char* glsl_version = "#version 130";
+	ImGui_ImplOpenGL3_Init(glsl_version);
+
 	// Editor Main loop!
+	bool show_demo_window = true;
 	while (!glfwWindowShouldClose(m_window))
 	{
-		glViewport(0, 0, m_width, m_height);
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
+
+		ImGui::ShowDemoWindow(&show_demo_window);
+
+		// Rendering
+		ImGui::Render();
+		int display_w, display_h;
+		glfwMakeContextCurrent(m_window);
+		glfwGetFramebufferSize(m_window, &display_w, &display_h);
+		glViewport(0, 0, display_w, display_h);
 		glClearColor(m_backgroundColor[0], m_backgroundColor[1], m_backgroundColor[2], 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		m_timeline->DrawBar();
+		glClear(GL_COLOR_BUFFER_BIT);
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 		glfwSwapBuffers(m_window);
 		glfwPollEvents();
 	}
+	// Cleanup
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
 	glfwDestroyWindow(m_window);
 }
 
