@@ -1,4 +1,5 @@
 #pragma once
+#include "imgui/imgui.h"
 
 class Editor;
 
@@ -9,6 +10,6 @@ public:
 	virtual ~Toolbar();
 
 	Editor *editor;
-
+	void TickUI(bool* p_open = NULL);
 private:
 };

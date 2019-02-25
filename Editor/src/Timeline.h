@@ -1,4 +1,5 @@
 #pragma once
+#include "imgui/imgui.h"
 
 class Editor;
 
@@ -10,5 +11,6 @@ public:
 
 	Editor *editor;
 	void DrawBar();
+	void TickUI(bool* p_open = NULL);
 private:
 };

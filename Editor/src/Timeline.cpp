@@ -35,3 +35,13 @@ Timeline::~Timeline()
 void Timeline::DrawBar()
 {
 }
+
+void Timeline::TickUI(bool* p_open)
+{
+	if (!ImGui::Begin("Timeline", p_open))
+	{
+		ImGui::End();
+		return;
+	}
+	ImGui::End();
+}

@@ -47,8 +47,6 @@ void Editor::Start()
 	glfwSetMouseButtonCallback(m_window, glfw_mousebutton_callback);
 	glfwSetCursorPosCallback(m_window, glfw_mousepos_callback);
 	glfwSetScrollCallback(m_window, glfw_mousewheel_callback);
-	
-	m_console->Log("Start main loop..");
 
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
@@ -68,6 +66,7 @@ void Editor::Start()
 
 	// Editor Main loop!
 	bool show_demo_window = true;
+	m_console->Log("Start main loop\n");
 	while (!glfwWindowShouldClose(m_window))
 	{
 		ImGui_ImplOpenGL3_NewFrame();
@@ -75,6 +74,7 @@ void Editor::Start()
 		ImGui::NewFrame();
 
 		ImGui::ShowDemoWindow(&show_demo_window);
+		TickUI();
 
 		// Rendering
 		ImGui::Render();
@@ -121,13 +121,14 @@ void Editor::Play()
 		__int64 end = audio->GetDuration();
 
 		audio->SetPositions(&start, &end, true);
-		//audio->Play();
+		m_console->Log("Restart\n");
 		return;
 	}
 	if ( m_mode == EditorMode::Edit)
 	{
 		m_mode = EditorMode::Play;
 		audio->Play();
+		m_console->Log("Play from current position\n");
 		return;
 	}
 }
@@ -138,6 +139,7 @@ void Editor::Stop()
 	{
 		m_mode = EditorMode::Edit;
 		audio->Stop();
+		m_console->Log("Stop\n");
 		return;
 	}
 }
@@ -148,14 +150,21 @@ Console * Editor::GetConsole()
 }
 
 
+void Editor::TickUI()
+{
+	m_console->TickUI();
+	m_toolbar->TickUI();
+	m_timeline->TickUI();
+}
+
 void Editor::glfw_error_callback(int error, const char * description)
 {
 }
 
 void Editor::glfw_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GLFW_TRUE);
+//	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+//		glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
 
 void Editor::glfw_char_callback(GLFWwindow * window, unsigned int codepoint)

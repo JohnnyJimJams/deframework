@@ -9,16 +9,15 @@ Console write, Scroll, select for copy
 Integrate FMod (?  statically linked?, alternatives?) - Mp3.cpp !! Awesome
 Load music
 Play Demo (Add Toolbar window)
-
-TODO!
-=====
 Switch to Imgui!
  - Get a test bed (glfw3)
  - Integrate Imgui (glfw_render_thingo)
  - Play
  - now integrate with deframework
+
+TODO!
+=====
 Add timeline Window
- - expose drawrect
  - draw song time
  - allow scrubbing
 Zoom timeline Window
