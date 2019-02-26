@@ -70,11 +70,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Editor\dep;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Runtime\dep\glfw3.2.1\include;$(SolutionDir)Runtime\src;$(SolutionDir)Runtime\dep\gl3w</IncludePath>
+    <IncludePath>$(SolutionDir)Runtime\dep\eigen3.3.7;$(SolutionDir)Editor\dep;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Runtime\dep\glfw3.2.1\include;$(SolutionDir)Runtime\src;$(SolutionDir)Runtime\dep\gl3w</IncludePath>
     <LibraryPath>$(SolutionDir)Runtime\dep\glfw3.2.1\x86\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Editor\dep;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Runtime\dep\glfw3.2.1\include;$(SolutionDir)Runtime\src;$(SolutionDir)Runtime\dep\gl3w</IncludePath>
+    <IncludePath>$(SolutionDir)Runtime\dep\eigen3.3.7;$(SolutionDir)Editor\dep;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Runtime\dep\glfw3.2.1\include;$(SolutionDir)Runtime\src;$(SolutionDir)Runtime\dep\gl3w</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(SolutionDir)Runtime\dep\glfw3.2.1\x86\Release</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -140,6 +140,7 @@
     <ClCompile Include="..\Editor\src\Timeline.cpp" />
     <ClCompile Include="..\Editor\src\Toolbar.cpp" />
     <ClCompile Include="..\Runtime\dep\gl3w\GL\gl3w.c" />
+    <ClCompile Include="..\Runtime\src\Keyframe.cpp" />
     <ClCompile Include="..\Runtime\src\MP3.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +148,7 @@
     <ClInclude Include="..\Editor\src\Editor.h" />
     <ClInclude Include="..\Editor\src\Timeline.h" />
     <ClInclude Include="..\Editor\src\Toolbar.h" />
+    <ClInclude Include="..\Runtime\src\Keyframe.h" />
     <ClInclude Include="..\Runtime\src\MP3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

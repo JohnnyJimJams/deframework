@@ -13,63 +13,87 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\3rd Party">
+      <UniqueIdentifier>{234aa3c5-5753-4695-b7a4-a9e115397685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Runtime">
+      <UniqueIdentifier>{ed3931d0-7f23-4a49-a910-529fcded6f85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Editor">
+      <UniqueIdentifier>{61f8eca0-649e-4be2-b7b2-cac1e9ea80cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Runtime">
+      <UniqueIdentifier>{a31fd62c-abd8-4175-b681-786c9fee9a74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\3rd Party">
+      <UniqueIdentifier>{6e1acffa-d291-40f6-ac05-186d4183dcfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Editor">
+      <UniqueIdentifier>{eb6e44e6-116f-4ed8-97d5-92aa39dba672}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Editor\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Editor\src\Editor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Editor\src\Console.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Editor</Filter>
     </ClCompile>
-    <ClCompile Include="..\Runtime\src\MP3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Editor\src\Toolbar.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\Editor\src\Editor.cpp">
+      <Filter>Source Files\Editor</Filter>
     </ClCompile>
     <ClCompile Include="..\Editor\src\Timeline.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Editor\src\Toolbar.cpp">
+      <Filter>Source Files\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Runtime\src\MP3.cpp">
+      <Filter>Source Files\Runtime</Filter>
     </ClCompile>
     <ClCompile Include="..\Runtime\dep\gl3w\GL\gl3w.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\3rd Party</Filter>
     </ClCompile>
     <ClCompile Include="..\Editor\dep\imgui\imgui.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\3rd Party</Filter>
     </ClCompile>
     <ClCompile Include="..\Editor\dep\imgui\imgui_demo.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\3rd Party</Filter>
     </ClCompile>
     <ClCompile Include="..\Editor\dep\imgui\imgui_draw.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\3rd Party</Filter>
     </ClCompile>
     <ClCompile Include="..\Editor\dep\imgui\imgui_impl_glfw.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\3rd Party</Filter>
     </ClCompile>
     <ClCompile Include="..\Editor\dep\imgui\imgui_impl_opengl3.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\3rd Party</Filter>
     </ClCompile>
     <ClCompile Include="..\Editor\dep\imgui\imgui_widgets.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\3rd Party</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Runtime\src\Keyframe.cpp">
+      <Filter>Source Files\Runtime</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Editor\src\Editor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Editor\src\Console.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Editor\src\Editor.h">
+      <Filter>Header Files\Editor</Filter>
     </ClInclude>
     <ClInclude Include="..\Runtime\src\MP3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Editor\src\Toolbar.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Runtime</Filter>
     </ClInclude>
     <ClInclude Include="..\Editor\src\Timeline.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Editor\src\Toolbar.h">
+      <Filter>Header Files\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\src\Keyframe.h">
+      <Filter>Header Files\Runtime</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
