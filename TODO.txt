@@ -17,11 +17,56 @@ Switch to Imgui!
 Add timeline Window
  - draw song time
  - allow scrubbing
- 
+
 TODO!
 =====
+All Initialization happens at the start of the demo, this means scrubbing will work without issues.
+
+Runtime Sprint
+==============
+
+Animation Classes
+ - KeyFrameHandle (Type, Position)
+ - KeyFrameFloat (Time, Value, HanldeIn, HandleOut)
+ - KeyFrameBool (Time, Value)
+ - KeyFrameInt (Time, Value) (Good for animating indexes to lists)
+ - Animations (Object, Property, PropertyType(float/bool/int), List of Keyframes)
+
+Entities
+ - Position
+ - Rotation
+ - Scale
+ - Mesh / Materials
+
+Layer Class (Visual layers)
+ - Opacity
+ - Order
+ - BlendMode
+ - Enabled
+ - List of Entities
+
+Assets
+ - Mp3
+ - Texture
+ - glTF
+ - Shader
+
+AssetManager
+
+Demo Class
+ - Name
+ - ProjectPath
+ - Music
+ - List of Layers
+ - List of Animations
+ - Save
+ - Load
+ - Build/Package
+ - AssetManager
+
+EditorDemo (For undo, redo, detecting if changes have occured) - Any action that changes the Demo instance is recorded here.
+
+Sprint 2
+========
 Zoom timeline Window
 Scroll timeline Window
-Save function
-Load function
-Build function?
