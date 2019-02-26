@@ -4,28 +4,6 @@
 Timeline::Timeline(Editor *peditor)
 {
 	editor = peditor;
-
-	/*
-	m_bar = TwNewBar("barTimeline");
-	TwDefine(" barTimeline label='Timeline' ");
-	TwDefine(" barTimeline resizable=false ");
-	unsigned int edWidth = editor->GetWidth();
-	unsigned int edHeight = editor->GetHeight();
-	unsigned int margin = 20;
-
-	unsigned int size[2];
-	size[0] = edWidth - 2 * margin;
-	size[1] = 50;
-	TwSetParam(m_bar, NULL, "size", TW_PARAM_INT32, 2, size);
-
-	unsigned int valuesWidth = size[0];
-	TwSetParam(m_bar, NULL, "valueswidth", TW_PARAM_INT32, 1, &valuesWidth);
-
-	unsigned int pos[2];
-	pos[0] = margin + 5;
-	pos[1] = edHeight - margin * 2 - 155 - 50;
-	TwSetParam(m_bar, NULL, "position", TW_PARAM_INT32, 2, pos);
-	*/
 }
 
 Timeline::~Timeline()
@@ -43,5 +21,36 @@ void Timeline::TickUI(bool* p_open)
 		ImGui::End();
 		return;
 	}
+	ImDrawList* draw_list = ImGui::GetWindowDrawList();
+	ImVec4 col = ImVec4(0.1f, 0.2f, 0.1f, 0.7f);
+	const ImU32 col32 = ImColor(col);
+	const ImVec2 p = ImGui::GetCursorScreenPos();
+	const ImVec2 s = ImGui::GetWindowSize();
+	const ImVec2 s1 = ImGui::GetWindowContentRegionMax();
+	
+	int left = p.x + 5;
+	int right = p.x + s.x - 20;
+	int ycentre = ((p.y + s.y - 40) - (p.y + 5)) * 0.5 + p.y + 5;
+	draw_list->AddRectFilled(ImVec2(left, ycentre - 5), ImVec2(right, ycentre + 5), col32);
+
+	double pos = editor->GetMusicSecondsNow() / editor->GetMusicSecondsTotal();
+	draw_list->AddCircleFilled(ImVec2(left + (right - left) * pos, ycentre), 10, IM_COL32_WHITE);
+
+	// Scrub time line on mouse down
+	ImVec2 canvas_size = ImGui::GetContentRegionAvail();
+	ImGui::InvisibleButton("timelinecanvas", canvas_size);	// allows for clicking, hovering without moving the window
+	if (ImGui::IsItemHovered())
+	{ 
+		if (ImGui::IsMouseDown(0))
+		{
+			ImVec2 canvas_pos = ImGui::GetCursorScreenPos();
+			ImVec2 mouse_pos_in_canvas = ImVec2(ImGui::GetIO().MousePos.x - canvas_pos.x, ImGui::GetIO().MousePos.y - canvas_pos.y);
+
+			float mousex01 = (ImGui::GetIO().MousePos.x - canvas_pos.x) / (float)(right - left);
+			editor->SetMusicSeconds(editor->GetMusicSecondsTotal() * mousex01);
+			editor->GetConsole()->Log("set music time: %f\n", pos);
+		}
+	}
+
 	ImGui::End();
 }

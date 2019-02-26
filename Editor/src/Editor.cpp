@@ -36,8 +36,8 @@ void Editor::Start()
 
 	// Audio!
 	audio = new Mp3();
-	audio->Load(L"C:\\Users\\Alienware\\Desktop\\Demoscene\\deframework2_demoExample\\sample_orig.mp3");
-
+	//audio->Load(L"C:\\Users\\Alienware\\Desktop\\Demoscene\\deframework2_demoExample\\sample_orig.mp3");
+	audio->Load(L"C:\\Users\\Alienware\\Desktop\\Demoscene\\Jeroen\\gone.mp3");
 	m_console = new Console(this);
 	m_toolbar = new Toolbar(this);
 	m_timeline = new Timeline(this);
@@ -142,6 +142,24 @@ void Editor::Stop()
 		m_console->Log("Stop\n");
 		return;
 	}
+}
+
+double Editor::GetMusicSecondsNow()
+{
+	return audio->GetCurrentPosition() / 10000000.0;
+}
+
+void Editor::SetMusicSeconds(double time)
+{
+	__int64 start =(__int64) (time * 10000000.0);
+	__int64 end = audio->GetDuration();
+
+	audio->SetPositions(&start, &end, true);
+}
+
+double Editor::GetMusicSecondsTotal()
+{
+	return audio->GetDuration() / 10000000.0;
 }
 
 Console * Editor::GetConsole()

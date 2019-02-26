@@ -14,12 +14,12 @@ Switch to Imgui!
  - Integrate Imgui (glfw_render_thingo)
  - Play
  - now integrate with deframework
-
-TODO!
-=====
 Add timeline Window
  - draw song time
  - allow scrubbing
+ 
+TODO!
+=====
 Zoom timeline Window
 Scroll timeline Window
 Save function

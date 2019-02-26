@@ -24,6 +24,9 @@ public:
 	unsigned int GetHeight();
 	void Play();
 	void Stop();
+	double GetMusicSecondsNow();
+	void SetMusicSeconds(double time);
+	double GetMusicSecondsTotal();
 	Console * GetConsole();
 
 private:

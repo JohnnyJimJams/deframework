@@ -52,7 +52,7 @@ private:
 	IMediaControl *  pimc;
 	IMediaEventEx *  pimex;
 	IBasicAudio * piba;
-	IMediaSeeking * pims;
+	IMediaSeeking * pims; 
 	bool    ready;
 	// Duration of the MP3.
 	__int64 duration;
