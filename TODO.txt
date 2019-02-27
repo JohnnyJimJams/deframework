@@ -17,20 +17,26 @@ Switch to Imgui!
 Add timeline Window
  - draw song time
  - allow scrubbing
+ - KeyFrameHandle (Type, Position)
+ - KeyFrame (Time, Type, Value, HanldeIn, HandleOut)
+Animation Class
+ - Animations (Object, Property, PropertyType(float/bool/int/double), List of Keyframes)
+ - Implement InsertKeyframe
+ - Implement DeleteKeyframe
 
 TODO!
 =====
-All Initialization happens at the start of the demo, this means scrubbing will work without issues.
+* All Initialization happens at the start of the demo, this means scrubbing will work without issues.
+* Eigen as the maths lib
 
 Runtime Sprint
 ==============
-
-Animation Classes
- - KeyFrameHandle (Type, Position)
- - KeyFrameFloat (Time, Value, HanldeIn, HandleOut)
- - KeyFrameBool (Time, Value)
- - KeyFrameInt (Time, Value) (Good for animating indexes to lists)
- - Animations (Object, Property, PropertyType(float/bool/int), List of Keyframes)
+Animation System
+ - Test it out in the editor (Dopesheet -> keymebool, not working - debug)
+ - Implement MoveKeyframe
+ - Linear, cubic interpolation
+ - Dope sheet pass 1
+ - Curve editor pass 1
 
 Entities
  - Position
@@ -40,18 +46,24 @@ Entities
 
 Layer Class (Visual layers)
  - Opacity
- - Order
- - BlendMode
  - Enabled
  - List of Entities
 
+Composer (Chooses which layers get ticked, post processing and how they're combined)
+ - Outputs to DemoView Window
+
 Assets
  - Mp3
- - Texture
  - glTF
- - Shader
+ - Texture
+ - Shaders
+ - Materials
+ - Blob
 
 AssetManager
+ - Load
+ - Save
+ - Package
 
 Demo Class
  - Name
@@ -59,12 +71,24 @@ Demo Class
  - Music
  - List of Layers
  - List of Animations
+ - Composer
  - Save
  - Load
  - Build/Package
  - AssetManager
 
 EditorDemo (For undo, redo, detecting if changes have occured) - Any action that changes the Demo instance is recorded here.
+
+Editor Windows
+==============
+Layers / Hierarchy
+Demo Properties
+Assets
+Viewport (Selection and Editor Camera)
+DemoView/Output
+Properties
+Dopesheet
+Curve Editor
 
 Sprint 2
 ========

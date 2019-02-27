@@ -135,19 +135,23 @@
     <ClCompile Include="..\Editor\dep\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="..\Editor\dep\imgui\imgui_widgets.cpp" />
     <ClCompile Include="..\Editor\src\Console.cpp" />
+    <ClCompile Include="..\Editor\src\DopeSheet.cpp" />
     <ClCompile Include="..\Editor\src\Editor.cpp" />
     <ClCompile Include="..\Editor\src\main.cpp" />
     <ClCompile Include="..\Editor\src\Timeline.cpp" />
     <ClCompile Include="..\Editor\src\Toolbar.cpp" />
     <ClCompile Include="..\Runtime\dep\gl3w\GL\gl3w.c" />
+    <ClCompile Include="..\Runtime\src\Animation.cpp" />
     <ClCompile Include="..\Runtime\src\Keyframe.cpp" />
     <ClCompile Include="..\Runtime\src\MP3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Editor\src\Console.h" />
+    <ClInclude Include="..\Editor\src\DopeSheet.h" />
     <ClInclude Include="..\Editor\src\Editor.h" />
     <ClInclude Include="..\Editor\src\Timeline.h" />
     <ClInclude Include="..\Editor\src\Toolbar.h" />
+    <ClInclude Include="..\Runtime\src\Animation.h" />
     <ClInclude Include="..\Runtime\src\Keyframe.h" />
     <ClInclude Include="..\Runtime\src\MP3.h" />
   </ItemGroup>

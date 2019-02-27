@@ -7,6 +7,7 @@
 #include "Console.h"
 #include "Toolbar.h"
 #include "Timeline.h"
+#include "DopeSheet.h"
 #include <GL/gl3w.h>    // Initialize with gl3wInit()
 #include <GLFW/glfw3.h>
 
@@ -34,6 +35,7 @@ private:
 	Console *m_console;
 	Toolbar *m_toolbar;
 	Timeline *m_timeline;
+	DopeSheet *m_dopesheet;
 	unsigned int m_width;
 	unsigned int m_height;
 	GLfloat m_backgroundColor[3] = { 0, 0, 0 };

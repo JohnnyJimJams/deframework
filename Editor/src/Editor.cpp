@@ -41,6 +41,7 @@ void Editor::Start()
 	m_console = new Console(this);
 	m_toolbar = new Toolbar(this);
 	m_timeline = new Timeline(this);
+	m_dopesheet = new DopeSheet(this);
 
 	glfwSetKeyCallback(m_window, glfw_key_callback);
 	glfwSetCharCallback(m_window, glfw_char_callback);
@@ -173,6 +174,7 @@ void Editor::TickUI()
 	m_console->TickUI();
 	m_toolbar->TickUI();
 	m_timeline->TickUI();
+	m_dopesheet->TickUI();
 }
 
 void Editor::glfw_error_callback(int error, const char * description)

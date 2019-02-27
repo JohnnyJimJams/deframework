@@ -9,26 +9,34 @@ enum KeyframeHandleType
 struct KeyframeHandle
 {
 	KeyframeHandle();
+	KeyframeHandle(KeyframeHandleType pType, Eigen::Vector2f pPosition);
 	KeyframeHandleType type;
 	Eigen::Vector2f position;
 };
 
-enum KeyframeType
+enum PropertyType
 {
 	BOOL_VAL, DOUBLE_VAL, FLOAT_VAL, INT_VAL
 };
 
 struct Keyframe
 {
-	Keyframe();
+	Keyframe(double ptime, bool pBoolValue);
+	Keyframe(double ptime, int pIntValue);
+	Keyframe(double ptime, float pfloatValue, KeyframeHandle pHandleIn, KeyframeHandle pHandleOut);
+	Keyframe(double ptime, double pDoubleValue, KeyframeHandle pHandleIn, KeyframeHandle pHandleOut);
 
 	double time;
 
-	KeyframeType type;
-	bool boolValue;
-	float floatValue;
-	double doubleValue;
-	int intValue;
+	PropertyType type;
+
+	union PropertyValue {
+		bool boolValue;
+		float floatValue;
+		double doubleValue;
+		int intValue;
+	};
+	PropertyValue value;
 
 	KeyframeHandle in;
 	KeyframeHandle out;
