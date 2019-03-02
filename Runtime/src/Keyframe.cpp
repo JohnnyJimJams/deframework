@@ -2,7 +2,7 @@
 
 KeyframeHandle::KeyframeHandle()
 {
-	type = KeyframeHandleType::None;
+	type = KeyframeHandleType::Constant;
 	position = Eigen::Vector2f(0, 0);
 }
 

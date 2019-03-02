@@ -3,7 +3,7 @@
 
 enum KeyframeHandleType
 {
-	None, Smooth, Constant, Linear, User
+	Constant, Linear, Smooth, User
 };
 
 struct KeyframeHandle

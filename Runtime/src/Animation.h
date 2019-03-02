@@ -13,6 +13,8 @@ public:
 	double EvaluateDouble(double time, bool updateProperty = true);
 	int InsertKeyframe(Keyframe k);										// keep this vector of Keyframes sorted by time
 	void DeleteKeyframe(int index);
+	std::vector<Keyframe> GetKeyframes();
+	PropertyType GetType();
 private:
 	std::vector<Keyframe> keyframes;
 	void *property;

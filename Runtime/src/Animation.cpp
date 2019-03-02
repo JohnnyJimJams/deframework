@@ -1,5 +1,9 @@
 #include "Animation.h"
 
+Animation::Animation()
+{
+}
+
 Animation::Animation(void *p_property, PropertyType p_type)
 {
 	property = p_property;
@@ -86,9 +90,10 @@ float Animation::EvaluateFloat(double time, bool updateProperty)
 					// check if value falls between keyframes[i].time and keyframes[i+1]
 					if (time < keyframes[i].time)
 					{
-						//Keyframe *KA = &keyframes[i - 1];
-						//Keyframe *KB = &keyframes[i];
-						result = keyframes[i - 1].value.floatValue; // TODO use handles to interpolate between this and the next keyframe
+						Keyframe *KA = &keyframes[i - 1];
+						Keyframe *KB = &keyframes[i];
+						//switch ()
+						result = KA->value.floatValue; // TODO use handles to interpolate between this and the next keyframe
 						break;
 					}
 				}
@@ -133,8 +138,11 @@ double Animation::EvaluateDouble(double time, bool updateProperty)
 int Animation::InsertKeyframe(Keyframe k)
 {
 	// keep this vector of Keyframes sorted by time
-	if (keyframes.size() == 0) return 0.0f; // no keyframes, bail without updating property, return value is a dummy value
-
+	if (keyframes.size() == 0) 
+	{
+		keyframes.push_back(k); // no keyframes, just add it
+		return 1;
+	}
 	if (keyframes[0].time >= k.time)
 	{
 		std::vector<Keyframe>::iterator it = keyframes.begin();
@@ -162,4 +170,14 @@ int Animation::InsertKeyframe(Keyframe k)
 void Animation::DeleteKeyframe(int index)
 {
 	keyframes.erase(keyframes.begin() + index);
+}
+
+std::vector<Keyframe> Animation::GetKeyframes()
+{
+	return keyframes;
+}
+
+PropertyType Animation::GetType()
+{
+	return type;
 }
