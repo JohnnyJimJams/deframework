@@ -23,34 +23,38 @@ Animation Class
  - Animations (Object, Property, PropertyType(float/bool/int/double), List of Keyframes)
  - Implement InsertKeyframe
  - Implement DeleteKeyframe
+ - Test it out in the editor (Dopesheet -> keymebool, not working - debug)
+ - Debug Linear interpolation!
+ - Cubic Catmull Rom interpolation (with auto handles)
+ShaderProgram Class (from old framework)
 
 TODO!
 =====
 * All Initialization happens at the start of the demo, this means scrubbing will work without issues.
 * Eigen as the maths lib
 
+Bugs!
+=====
+Reducing size of curve editor window crashes application
+Windows 10 display scaling isn't taking into account, the whole editor is too small if display scaling is set bigger than 100% under windows 10
+
 Runtime Sprint
 ==============
-Animation System
- - Test it out in the editor (Dopesheet -> keymebool, not working - debug)
- - Implement MoveKeyframe
- - Linear, cubic interpolation
- - Dope sheet pass 1
- - Curve editor pass 1
+Demoview (Editor)
+Layers
+RenderBuffers
+Viewport (Editor)
 
 Entities
  - Position
  - Rotation
  - Scale
- - Mesh / Materials
+ - Mesh / Materials / Mesh Animation
 
 Layer Class (Visual layers)
  - Opacity
  - Enabled
  - List of Entities
-
-Composer (Chooses which layers get ticked, post processing and how they're combined)
- - Outputs to DemoView Window
 
 Assets
  - Mp3

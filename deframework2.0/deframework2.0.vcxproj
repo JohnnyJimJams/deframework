@@ -83,6 +83,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);opengl32.lib;glfw3.lib;strmiids.lib</AdditionalDependencies>
@@ -105,6 +106,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -135,6 +137,8 @@
     <ClCompile Include="..\Editor\dep\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="..\Editor\dep\imgui\imgui_widgets.cpp" />
     <ClCompile Include="..\Editor\src\Console.cpp" />
+    <ClCompile Include="..\Editor\src\CurveEditor.cpp" />
+    <ClCompile Include="..\Editor\src\DemoView.cpp" />
     <ClCompile Include="..\Editor\src\DopeSheet.cpp" />
     <ClCompile Include="..\Editor\src\Editor.cpp" />
     <ClCompile Include="..\Editor\src\main.cpp" />
@@ -144,9 +148,12 @@
     <ClCompile Include="..\Runtime\src\Animation.cpp" />
     <ClCompile Include="..\Runtime\src\Keyframe.cpp" />
     <ClCompile Include="..\Runtime\src\MP3.cpp" />
+    <ClCompile Include="..\Runtime\src\ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Editor\src\Console.h" />
+    <ClInclude Include="..\Editor\src\CurveEditor.h" />
+    <ClInclude Include="..\Editor\src\DemoView.h" />
     <ClInclude Include="..\Editor\src\DopeSheet.h" />
     <ClInclude Include="..\Editor\src\Editor.h" />
     <ClInclude Include="..\Editor\src\Timeline.h" />
@@ -154,6 +161,7 @@
     <ClInclude Include="..\Runtime\src\Animation.h" />
     <ClInclude Include="..\Runtime\src\Keyframe.h" />
     <ClInclude Include="..\Runtime\src\MP3.h" />
+    <ClInclude Include="..\Runtime\src\ShaderProgram.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

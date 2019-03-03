@@ -41,7 +41,9 @@ void Editor::Start()
 	m_console = new Console(this);
 	m_toolbar = new Toolbar(this);
 	m_timeline = new Timeline(this);
+	m_curveeditor = new CurveEditor(this);
 	m_dopesheet = new DopeSheet(this);
+	m_demoview = new DemoView(this);
 
 	glfwSetKeyCallback(m_window, glfw_key_callback);
 	glfwSetCharCallback(m_window, glfw_char_callback);
@@ -168,6 +170,11 @@ Console * Editor::GetConsole()
 	return m_console;
 }
 
+CurveEditor * Editor::GetCurveEditor()
+{
+	return m_curveeditor;
+}
+
 
 void Editor::TickUI()
 {
@@ -175,6 +182,8 @@ void Editor::TickUI()
 	m_toolbar->TickUI();
 	m_timeline->TickUI();
 	m_dopesheet->TickUI();
+	m_curveeditor->TickUI();
+	m_demoview->TickUI();
 }
 
 void Editor::glfw_error_callback(int error, const char * description)

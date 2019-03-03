@@ -81,6 +81,15 @@
     <ClCompile Include="..\Editor\src\DopeSheet.cpp">
       <Filter>Source Files\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="..\Editor\src\CurveEditor.cpp">
+      <Filter>Source Files\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Runtime\src\ShaderProgram.cpp">
+      <Filter>Source Files\Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Editor\src\DemoView.cpp">
+      <Filter>Source Files\Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Editor\src\Console.h">
@@ -105,6 +114,15 @@
       <Filter>Header Files\Runtime</Filter>
     </ClInclude>
     <ClInclude Include="..\Editor\src\DopeSheet.h">
+      <Filter>Header Files\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Editor\src\CurveEditor.h">
+      <Filter>Header Files\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\src\ShaderProgram.h">
+      <Filter>Header Files\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Editor\src\DemoView.h">
       <Filter>Header Files\Editor</Filter>
     </ClInclude>
   </ItemGroup>

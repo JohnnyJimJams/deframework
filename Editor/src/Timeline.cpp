@@ -32,7 +32,6 @@ void Timeline::TickUI(bool* p_open)
 	int right = p.x + s.x - 20;
 	int ycentre = ((p.y + s.y - 40) - (p.y + 5)) * 0.5 + p.y + 5;
 	draw_list->AddRectFilled(ImVec2(left, ycentre - 5), ImVec2(right, ycentre + 5), col32);
-
 	double pos = editor->GetMusicSecondsNow() / editor->GetMusicSecondsTotal();
 	draw_list->AddCircleFilled(ImVec2(left + (right - left) * pos, ycentre), 10, IM_COL32_WHITE);
 

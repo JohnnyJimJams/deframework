@@ -60,7 +60,43 @@ int Animation::EvaluateInt(double time, bool updateProperty)
 					// check if value falls between keyframes[i].time and keyframes[i+1]
 					if (time < keyframes[i].time)
 					{
-						result = keyframes[i - 1].value.intValue;
+						Keyframe *KA = &keyframes[i - 1];
+						if (KA->interpolation == KeyframeInterpolationType::CONSTANT)
+						{
+							// Constant
+							result = KA->value.intValue;
+						}
+						else
+						{
+							Keyframe *KB = &keyframes[i];
+							double length = KB->time - KA->time;
+							double t = (time - KA->time) / length;
+							if (KA->interpolation == KeyframeInterpolationType::LINEAR)
+							{
+								// Linear
+								int valueLength = KB->value.intValue - KA->value.intValue;
+								result = KA->value.intValue + valueLength * t;
+							}
+							else
+							{
+								// Curved
+								Keyframe *KZ, *KC;
+								if (i - 2 < 0)
+									KZ = &keyframes[i - 1];
+								else
+									KZ = &keyframes[i - 2];
+
+								if (i + 1 == keyframes.size())
+									KC = &keyframes[i];
+								else
+									KC = &keyframes[i + 1];
+
+								result = 0.5f * ((2 * KA->value.intValue) + 
+									(KB->value.intValue - KZ->value.intValue) * t + 
+									(2 * KZ->value.intValue - 5 * KA->value.intValue + 4 * KB->value.intValue - KC->value.intValue) * t * t + 
+									(3 * KA->value.intValue - KZ->value.intValue - 3 * KB->value.intValue + KC->value.intValue) * t * t * t);
+							}
+						}
 						break;
 					}
 				}
@@ -91,9 +127,43 @@ float Animation::EvaluateFloat(double time, bool updateProperty)
 					if (time < keyframes[i].time)
 					{
 						Keyframe *KA = &keyframes[i - 1];
-						Keyframe *KB = &keyframes[i];
-						//switch ()
-						result = KA->value.floatValue; // TODO use handles to interpolate between this and the next keyframe
+						if (KA->interpolation == KeyframeInterpolationType::CONSTANT)
+						{
+							// Constant
+							result = KA->value.floatValue;
+						}
+						else
+						{
+							Keyframe *KB = &keyframes[i];
+							double length = KB->time - KA->time;
+							double t = (time - KA->time) / length;
+							if (KA->interpolation == KeyframeInterpolationType::LINEAR)
+							{
+								// Linear
+								float valueLength = KB->value.floatValue - KA->value.floatValue;
+								result = KA->value.floatValue + valueLength * t;
+							}
+							else
+							{
+								// Curved
+								Keyframe *KZ, *KC;
+								if (i - 2 == -1)
+									KZ = &keyframes[i - 1];
+								else
+									KZ = &keyframes[i - 2];
+
+								if (i + 1 == keyframes.size())
+									KC = &keyframes[i];
+								else
+									KC = &keyframes[i + 1];
+
+								result = 0.5f * ((2 * KA->value.floatValue) + 
+									(KB->value.floatValue - KZ->value.floatValue) * t + 
+									(2 * KZ->value.floatValue - 5 * KA->value.floatValue + 4 * KB->value.floatValue - KC->value.floatValue) * t * t + 
+									(3 * KA->value.floatValue - KZ->value.floatValue - 3 * KB->value.floatValue + KC->value.floatValue) * t * t * t);
+							}
+
+						}
 						break;
 					}
 				}
@@ -123,9 +193,43 @@ double Animation::EvaluateDouble(double time, bool updateProperty)
 					// check if value falls between keyframes[i].time and keyframes[i+1]
 					if (time < keyframes[i].time)
 					{
-						//Keyframe *KA = &keyframes[i - 1];
-						//Keyframe *KB = &keyframes[i];
-						result = keyframes[i - 1].value.doubleValue; // TODO use handles to interpolate between this and the next keyframe
+						Keyframe *KA = &keyframes[i - 1];
+						if (KA->interpolation == KeyframeInterpolationType::CONSTANT)
+						{
+							// Constant
+							result = KA->value.doubleValue;
+						}
+						else
+						{
+							Keyframe *KB = &keyframes[i];
+							double length = KB->time - KA->time;
+							double t = (time - KA->time) / length;
+							if (KA->interpolation == KeyframeInterpolationType::LINEAR)
+							{
+								// Linear
+								int valueLength = KB->value.doubleValue - KA->value.doubleValue;
+								result = KA->value.doubleValue + valueLength * t;
+							}
+							else
+							{
+								// Curved
+								Keyframe *KZ, *KC;
+								if ((i - 2) == -1)
+									KZ = &keyframes[i - 1];
+								else
+									KZ = &keyframes[i - 2];
+
+								if ((i + 1) == keyframes.size())
+									KC = &keyframes[i];
+								else
+									KC = &keyframes[i + 1];
+
+								result = 0.5f * ((2 * KA->value.doubleValue) + 
+									(KB->value.doubleValue - KZ->value.doubleValue) * t + 
+									(2 * KZ->value.doubleValue - 5 * KA->value.doubleValue + 4 * KB->value.doubleValue - KC->value.doubleValue) * t * t + 
+									(-KZ->value.doubleValue + 3 * KA->value.doubleValue - 3 * KB->value.doubleValue + KC->value.doubleValue) * t * t * t);
+							}
+						}
 						break;
 					}
 				}
@@ -165,6 +269,7 @@ int Animation::InsertKeyframe(Keyframe k)
 				}
 			}
 		}
+	return 0;
 }
 
 void Animation::DeleteKeyframe(int index)

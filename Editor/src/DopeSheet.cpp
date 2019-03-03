@@ -7,12 +7,12 @@ DopeSheet::DopeSheet(Editor *peditor)
 
 	// Test bool keyframes
 	animations.push_back(Animation((void *)&keymebool, PropertyType::BOOL_VAL));
-	animations[0].InsertKeyframe(Keyframe(0, false));
-	animations[0].InsertKeyframe(Keyframe(1, true));
-	animations[0].InsertKeyframe(Keyframe(2, false));
-	animations[0].InsertKeyframe(Keyframe(3, true));
-	animations[0].InsertKeyframe(Keyframe(4, false));
-	animations[0].InsertKeyframe(Keyframe(5, true));
+	animations[0].InsertKeyframe(Keyframe(0, false, KeyframeInterpolationType::CONSTANT));
+	animations[0].InsertKeyframe(Keyframe(1, true, KeyframeInterpolationType::CONSTANT));
+	animations[0].InsertKeyframe(Keyframe(2, false, KeyframeInterpolationType::CONSTANT));
+	animations[0].InsertKeyframe(Keyframe(3, true, KeyframeInterpolationType::CONSTANT));
+	animations[0].InsertKeyframe(Keyframe(4, false, KeyframeInterpolationType::CONSTANT));
+	animations[0].InsertKeyframe(Keyframe(5, true, KeyframeInterpolationType::CONSTANT));
 	editor->GetConsole()->Log("Dump of keyframes - Bool\n");
 	std::vector<Keyframe> kf = animations[0].GetKeyframes();
 	editor->GetConsole()->Log("num keyframes: %d\n", kf.size());
@@ -23,12 +23,12 @@ DopeSheet::DopeSheet(Editor *peditor)
 
 	// Test int keyframes
 	animations.push_back(Animation((void *)&keymeint, PropertyType::INT_VAL));
-	animations[1].InsertKeyframe(Keyframe(0, 3));
-	animations[1].InsertKeyframe(Keyframe(1, 1));
-	animations[1].InsertKeyframe(Keyframe(2, 4));
-	animations[1].InsertKeyframe(Keyframe(3, 1));
-	animations[1].InsertKeyframe(Keyframe(4, 5));
-	animations[1].InsertKeyframe(Keyframe(5, 9));
+	animations[1].InsertKeyframe(Keyframe(0, 3, KeyframeInterpolationType::CURVED));
+	animations[1].InsertKeyframe(Keyframe(1, 1, KeyframeInterpolationType::CURVED));
+	animations[1].InsertKeyframe(Keyframe(2, 4, KeyframeInterpolationType::CURVED));
+	animations[1].InsertKeyframe(Keyframe(3, 1, KeyframeInterpolationType::CURVED));
+	animations[1].InsertKeyframe(Keyframe(4, 5, KeyframeInterpolationType::CURVED));
+	animations[1].InsertKeyframe(Keyframe(5, 9, KeyframeInterpolationType::CURVED));
 	editor->GetConsole()->Log("Dump of keyframes - Int\n");
 	kf = animations[1].GetKeyframes();
 	editor->GetConsole()->Log("num keyframes: %d\n", kf.size());
@@ -39,9 +39,8 @@ DopeSheet::DopeSheet(Editor *peditor)
 
 	// Test float keyframes
 	animations.push_back(Animation((void *)&keymefloat, PropertyType::FLOAT_VAL));
-	animations[2].InsertKeyframe(Keyframe(0.0, 10.0f, KeyframeHandle(KeyframeHandleType::Smooth, Eigen::Vector2f(0, 0)), KeyframeHandle(KeyframeHandleType::Smooth, Eigen::Vector2f(0, 0))));
-	animations[2].InsertKeyframe(Keyframe(2.0, 5.0f, KeyframeHandle(KeyframeHandleType::Smooth, Eigen::Vector2f(0, 0)), KeyframeHandle(KeyframeHandleType::Smooth, Eigen::Vector2f(0, 0))));
-	animations[2].InsertKeyframe(Keyframe(5.0, 1.0f, KeyframeHandle(KeyframeHandleType::Smooth, Eigen::Vector2f(0, 0)), KeyframeHandle(KeyframeHandleType::Smooth, Eigen::Vector2f(0, 0))));
+	animations[2].InsertKeyframe(Keyframe(0.0, -10.0f, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+	animations[2].InsertKeyframe(Keyframe(10.0, 10.0f, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
 
 	editor->GetConsole()->Log("Dump of keyframes - float\n");
 	kf = animations[2].GetKeyframes();
@@ -53,9 +52,18 @@ DopeSheet::DopeSheet(Editor *peditor)
 
 	// Test double keyframes
 	animations.push_back(Animation((void *)&keymedouble, PropertyType::DOUBLE_VAL));
-	animations[3].InsertKeyframe(Keyframe(0.0, 4.3, KeyframeHandle(KeyframeHandleType::Smooth, Eigen::Vector2f(0, 0)), KeyframeHandle(KeyframeHandleType::Smooth, Eigen::Vector2f(0, 0))));
-	animations[3].InsertKeyframe(Keyframe(3.0, 4.2, KeyframeHandle(KeyframeHandleType::Smooth, Eigen::Vector2f(0, 0)), KeyframeHandle(KeyframeHandleType::Smooth, Eigen::Vector2f(0, 0))));
-	animations[3].InsertKeyframe(Keyframe(6.0, 4.1, KeyframeHandle(KeyframeHandleType::Smooth, Eigen::Vector2f(0, 0)), KeyframeHandle(KeyframeHandleType::Smooth, Eigen::Vector2f(0, 0))));
+	animations[3].InsertKeyframe(Keyframe(0.0, 0.3, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+	animations[3].InsertKeyframe(Keyframe(15.0, -150.2, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+	animations[3].InsertKeyframe(Keyframe(30.0, 150.0, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+	animations[3].InsertKeyframe(Keyframe(45.0, 130.0, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+	animations[3].InsertKeyframe(Keyframe(60.0, -30.0, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+	animations[3].InsertKeyframe(Keyframe(75.0, 30.0, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+	animations[3].InsertKeyframe(Keyframe(90.0, -30.0, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+	animations[3].InsertKeyframe(Keyframe(105.0, 30.0, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+	animations[3].InsertKeyframe(Keyframe(120.0, -30.0, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+	animations[3].InsertKeyframe(Keyframe(135.0, 30.0, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+	animations[3].InsertKeyframe(Keyframe(150.0, -30.0, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+	animations[3].InsertKeyframe(Keyframe(205.0, 80.0, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
 	editor->GetConsole()->Log("Dump of keyframes - Double\n");
 	kf = animations[3].GetKeyframes();
 	editor->GetConsole()->Log("num keyframes: %\n", kf.size());
@@ -63,6 +71,9 @@ DopeSheet::DopeSheet(Editor *peditor)
 	{
 		editor->GetConsole()->Log("time: %f  value: %f\n", kf[i].time, kf[i].value.doubleValue);
 	}
+
+	// set curve 3 to draw in the curve editor
+	editor->GetCurveEditor()->animation = &animations[3];
 
 }
 

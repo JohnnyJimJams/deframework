@@ -3,7 +3,7 @@
 
 enum KeyframeHandleType
 {
-	Constant, Linear, Smooth, User
+	AUTO
 };
 
 struct KeyframeHandle
@@ -19,12 +19,17 @@ enum PropertyType
 	BOOL_VAL, DOUBLE_VAL, FLOAT_VAL, INT_VAL
 };
 
+enum KeyframeInterpolationType
+{
+	CONSTANT, LINEAR, CURVED
+};
+
 struct Keyframe
 {
-	Keyframe(double ptime, bool pBoolValue);
-	Keyframe(double ptime, int pIntValue);
-	Keyframe(double ptime, float pfloatValue, KeyframeHandle pHandleIn, KeyframeHandle pHandleOut);
-	Keyframe(double ptime, double pDoubleValue, KeyframeHandle pHandleIn, KeyframeHandle pHandleOut);
+	Keyframe(double ptime, bool pBoolValue, KeyframeInterpolationType pInterpolation);
+	Keyframe(double ptime, int pIntValue, KeyframeInterpolationType pInterpolation);
+	Keyframe(double ptime, float pfloatValue, KeyframeInterpolationType pInterpolation, KeyframeHandle pHandleIn, KeyframeHandle pHandleOut);
+	Keyframe(double ptime, double pDoubleValue, KeyframeInterpolationType pInterpolation, KeyframeHandle pHandleIn, KeyframeHandle pHandleOut);
 
 	double time;
 
@@ -37,7 +42,7 @@ struct Keyframe
 		int intValue;
 	};
 	PropertyValue value;
-
+	KeyframeInterpolationType interpolation;
 	KeyframeHandle in;
 	KeyframeHandle out;
 };

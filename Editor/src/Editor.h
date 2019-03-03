@@ -8,6 +8,8 @@
 #include "Toolbar.h"
 #include "Timeline.h"
 #include "DopeSheet.h"
+#include "CurveEditor.h"
+#include "DemoView.h"
 #include <GL/gl3w.h>    // Initialize with gl3wInit()
 #include <GLFW/glfw3.h>
 
@@ -28,7 +30,8 @@ public:
 	double GetMusicSecondsNow();
 	void SetMusicSeconds(double time);
 	double GetMusicSecondsTotal();
-	Console * GetConsole();
+	Console *GetConsole();
+	CurveEditor *GetCurveEditor();
 
 private:
 	GLFWwindow* m_window;
@@ -36,9 +39,11 @@ private:
 	Toolbar *m_toolbar;
 	Timeline *m_timeline;
 	DopeSheet *m_dopesheet;
+	CurveEditor *m_curveeditor;
+	DemoView *m_demoview;
 	unsigned int m_width;
 	unsigned int m_height;
-	GLfloat m_backgroundColor[3] = { 0, 0, 0 };
+	GLfloat m_backgroundColor[3] = { .02f, .02f, 0.05f };
 	Mp3 *audio;
 	EditorMode m_mode;
 	void TickUI();
