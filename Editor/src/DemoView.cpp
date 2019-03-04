@@ -3,10 +3,14 @@
 DemoView::DemoView(Editor *peditor)
 {
 	editor = peditor;
+
+	m_texture = new Texture2D("C:\\Users\\Alienware\\Desktop\\Demoscene\\deframework2_demoExample\\smiley.jpg");
 }
 
 DemoView::~DemoView()
 {
+	delete m_texture;
+	delete m_shader;
 }
 
 void DemoView::TickUI(bool* p_open)
@@ -24,6 +28,7 @@ void DemoView::TickUI(bool* p_open)
 	
 	// Draw background colour
 	draw_list->AddRectFilled(windowPos, ImVec2(windowPos.x + windowSize.x, windowPos.y + windowSize.y), col32);
+	//draw_list->AddCallback()
 
 	//ImGui::InvisibleButton("demoviewcanvas", windowSize);	// allows for clicking, hovering without moving the window
 

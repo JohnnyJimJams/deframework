@@ -27,6 +27,11 @@ Animation Class
  - Debug Linear interpolation!
  - Cubic Catmull Rom interpolation (with auto handles)
 ShaderProgram Class (from old framework)
+Demoview (Editor)
+Assets
+ - Mp3
+ - Texture
+ - Shaders
 
 TODO!
 =====
@@ -40,9 +45,7 @@ Windows 10 display scaling isn't taking into account, the whole editor is too sm
 
 Runtime Sprint
 ==============
-Demoview (Editor)
-Layers
-RenderBuffers
+Layers / FrameBuffers
 Viewport (Editor)
 
 Entities
@@ -57,10 +60,7 @@ Layer Class (Visual layers)
  - List of Entities
 
 Assets
- - Mp3
  - glTF
- - Texture
- - Shaders
  - Materials
  - Blob
 

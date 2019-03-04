@@ -55,7 +55,7 @@ void Editor::Start()
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
 	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;   // Enable Gamepad Controls
 
 	// Setup Dear ImGui style
@@ -93,6 +93,13 @@ void Editor::Start()
 		glfwPollEvents();
 	}
 	// Cleanup
+	delete m_console;
+	delete m_toolbar;
+	delete m_timeline;
+	delete m_curveeditor;
+	delete m_dopesheet;
+	delete m_demoview;
+
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();

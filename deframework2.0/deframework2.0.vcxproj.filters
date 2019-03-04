@@ -90,6 +90,9 @@
     <ClCompile Include="..\Editor\src\DemoView.cpp">
       <Filter>Source Files\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="..\Runtime\src\Texture2D.cpp">
+      <Filter>Source Files\Runtime</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Editor\src\Console.h">
@@ -124,6 +127,12 @@
     </ClInclude>
     <ClInclude Include="..\Editor\src\DemoView.h">
       <Filter>Header Files\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\src\Texture2D.h">
+      <Filter>Header Files\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Editor\dep\stb_image.h">
+      <Filter>Header Files\3rd Party</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

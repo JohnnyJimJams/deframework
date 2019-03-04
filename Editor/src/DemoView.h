@@ -1,6 +1,7 @@
 #pragma once
 #include "imgui/imgui.h"
-#include "DemoView.h"
+#include "ShaderProgram.h"
+#include "Texture2D.h"
 
 class Editor;
 
@@ -13,4 +14,6 @@ public:
 	Editor *editor;
 	void TickUI(bool* p_open = NULL);
 private:
+	ShaderProgram *m_shader;
+	Texture2D *m_texture;
 };
