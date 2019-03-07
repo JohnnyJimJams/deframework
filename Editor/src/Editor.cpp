@@ -44,6 +44,7 @@ void Editor::Start()
 	m_curveeditor = new CurveEditor(this);
 	m_dopesheet = new DopeSheet(this);
 	m_demoview = new DemoView(this);
+	m_demo = new Demo(m_width, m_height);
 
 	glfwSetKeyCallback(m_window, glfw_key_callback);
 	glfwSetCharCallback(m_window, glfw_char_callback);
@@ -99,6 +100,7 @@ void Editor::Start()
 	delete m_curveeditor;
 	delete m_dopesheet;
 	delete m_demoview;
+	delete m_demo;
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
@@ -180,6 +182,11 @@ Console * Editor::GetConsole()
 CurveEditor * Editor::GetCurveEditor()
 {
 	return m_curveeditor;
+}
+
+Demo * Editor::GetDemo()
+{
+	return m_demo;
 }
 
 

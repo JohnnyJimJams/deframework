@@ -10,6 +10,7 @@
 #include "DopeSheet.h"
 #include "CurveEditor.h"
 #include "DemoView.h"
+#include "Demo.h"
 #include <GL/gl3w.h>    // Initialize with gl3wInit()
 #include <GLFW/glfw3.h>
 
@@ -32,6 +33,7 @@ public:
 	double GetMusicSecondsTotal();
 	Console *GetConsole();
 	CurveEditor *GetCurveEditor();
+	Demo *GetDemo();
 
 private:
 	GLFWwindow* m_window;
@@ -41,6 +43,7 @@ private:
 	DopeSheet *m_dopesheet;
 	CurveEditor *m_curveeditor;
 	DemoView *m_demoview;
+	Demo *m_demo;
 	unsigned int m_width;
 	unsigned int m_height;
 	GLfloat m_backgroundColor[3] = { .02f, .02f, 0.05f };

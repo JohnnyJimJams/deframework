@@ -24,12 +24,32 @@ Texture2D::Texture2D(const char * filename)
 	unsigned char *data = stbi_load(filename, &width, &height, &channels, 0);
 	if (data)
 	{
-		Texture2D(width, height, channels, data);
+		glGenTextures(1, &m_id);
+		glBindTexture(GL_TEXTURE_2D, m_id);
+		m_height = height;
+		m_width = width;
+		m_channels = channels;
+		glTexImage2D(GL_TEXTURE_2D, 0, channels == 3 ? GL_RGB : GL_RGBA, width, height, 0, channels == 3 ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+		SetParamater(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		SetParamater(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		SetParamater(GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		SetParamater(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		stbi_image_free(data);
 	}
 	else
 	{
-		Texture2D(width, height, channels);
+		glGenTextures(1, &m_id);
+		glBindTexture(GL_TEXTURE_2D, m_id);
+		m_height = height;
+		m_width = width;
+		m_channels = channels;
+		glTexImage2D(GL_TEXTURE_2D, 0, channels == 3 ? GL_RGB : GL_RGBA, width, height, 0, channels == 3 ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+		glGenerateMipmap(GL_TEXTURE_2D);
+		SetParamater(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		SetParamater(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		SetParamater(GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		SetParamater(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
 }
 

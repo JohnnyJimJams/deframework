@@ -93,6 +93,15 @@
     <ClCompile Include="..\Runtime\src\Texture2D.cpp">
       <Filter>Source Files\Runtime</Filter>
     </ClCompile>
+    <ClCompile Include="..\Runtime\src\Layer.cpp">
+      <Filter>Source Files\Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Runtime\src\FrameBuffer.cpp">
+      <Filter>Source Files\Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Runtime\src\Demo.cpp">
+      <Filter>Source Files\Runtime</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Editor\src\Console.h">
@@ -133,6 +142,15 @@
     </ClInclude>
     <ClInclude Include="..\Editor\dep\stb_image.h">
       <Filter>Header Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\src\Layer.h">
+      <Filter>Header Files\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\src\FrameBuffer.h">
+      <Filter>Header Files\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\src\Demo.h">
+      <Filter>Header Files\Runtime</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

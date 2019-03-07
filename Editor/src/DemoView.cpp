@@ -1,4 +1,6 @@
 #include "DemoView.h"
+#include "Editor.h"
+#include "Texture2D.h"
 
 DemoView::DemoView(Editor *peditor)
 {
@@ -25,12 +27,14 @@ void DemoView::TickUI(bool* p_open)
 	const ImU32 col32 = ImColor(backGroundCol);
 	ImVec2 windowPos = ImGui::GetCursorScreenPos();
 	ImVec2 windowSize = ImGui::GetContentRegionAvail();
-	
+
 	// Draw background colour
 	draw_list->AddRectFilled(windowPos, ImVec2(windowPos.x + windowSize.x, windowPos.y + windowSize.y), col32);
 	//draw_list->AddCallback()
 
 	//ImGui::InvisibleButton("demoviewcanvas", windowSize);	// allows for clicking, hovering without moving the window
+
+	ImGui::Image((ImTextureID)m_texture->GetId(), windowSize);
 
 	ImGui::End();
 }

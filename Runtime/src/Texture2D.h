@@ -7,7 +7,7 @@ public:
 
 	Texture2D(unsigned int width, unsigned int height, unsigned int channels, unsigned char *data = nullptr);
 	Texture2D(const char *filename);
-	virtual ~Texture2D();
+	~Texture2D();
 
 	void	Bind();
 	void	Unbind();
@@ -18,7 +18,7 @@ public:
 	unsigned int GetChannels();
 	unsigned int GetId();
 	void SetParamater(unsigned int name, unsigned int value);
-protected:
+//protected:
 	bool m_bound;
 	unsigned int m_width;
 	unsigned int m_height;

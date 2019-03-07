@@ -46,23 +46,25 @@ Windows 10 display scaling isn't taking into account, the whole editor is too sm
 Runtime Sprint
 ==============
 Layers / FrameBuffers
-Viewport (Editor)
-
-Entities
- - Position
- - Rotation
- - Scale
- - Mesh / Materials / Mesh Animation
-
-Layer Class (Visual layers)
  - Opacity
  - Enabled
  - List of Entities
+ - Order
+ - BlendMode
+ 
+Viewport (Editor)
 
 Assets
  - glTF
  - Materials
- - Blob
+
+Mesh
+
+Mesh Animation
+
+Transform
+
+Entities
 
 AssetManager
  - Load
