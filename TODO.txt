@@ -49,9 +49,8 @@ Layers / FrameBuffers
  - Opacity
  - Enabled
  - List of Entities
- - Order
  - BlendMode
- 
+
 Viewport (Editor)
 
 Assets
@@ -73,14 +72,9 @@ AssetManager
 
 Demo Class
  - Name
- - ProjectPath
  - Music
  - List of Layers
  - List of Animations
- - Composer
- - Save
- - Load
- - Build/Package
  - AssetManager
 
 EditorDemo (For undo, redo, detecting if changes have occured) - Any action that changes the Demo instance is recorded here.

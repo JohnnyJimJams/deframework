@@ -36,8 +36,7 @@ void Editor::Start()
 
 	// Audio!
 	audio = new Mp3();
-	//audio->Load(L"C:\\Users\\Alienware\\Desktop\\Demoscene\\deframework2_demoExample\\sample_orig.mp3");
-	audio->Load(L"C:\\Users\\Alienware\\Desktop\\Demoscene\\Jeroen\\gone.mp3");
+	audio->Load(L"..\\Editor\\resources\\TDIME.mp3");
 	m_console = new Console(this);
 	m_toolbar = new Toolbar(this);
 	m_timeline = new Timeline(this);

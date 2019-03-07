@@ -6,7 +6,8 @@ DemoView::DemoView(Editor *peditor)
 {
 	editor = peditor;
 
-	m_texture = new Texture2D("C:\\Users\\Alienware\\Desktop\\Demoscene\\deframework2_demoExample\\smiley.jpg");
+	//m_texture = new Texture2D("C:\\Users\\Alienware\\Desktop\\Demoscene\\deframework2_demoExample\\smiley.jpg");
+	m_texture = new Texture2D("..\\Editor\\resources\\smiley.jpg");
 }
 
 DemoView::~DemoView()
