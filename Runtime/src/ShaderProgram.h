@@ -10,23 +10,23 @@ public:
 	ShaderProgram();
 	virtual ~ShaderProgram();
 
-	void	bind();
-	void	unBind();
+	void	Bind();
+	void	Unbind();
 
 	bool	isBound() const	{	return m_bound;	}
 
-	void	compileFromFile(unsigned int a_type, const char* a_filename);
-	void	compileFromString(unsigned int a_type, const char* a_shader);
-	void	compileFromStrings(unsigned int a_type, unsigned int a_stringCount, const char** a_shaderStrings);
+	void	CompileFromFile(unsigned int a_type, const char* a_filename);
+	void	CompileFromString(unsigned int a_type, const char* a_shader);
+	void	CompileFromStrings(unsigned int a_type, unsigned int a_stringCount, const char** a_shaderStrings);
 
-	bool	linkProgram();
+	bool	LinkProgram();
 
-	int		getUniform(const char* a_uniform);
+	int		GetUniform(const char* a_uniform);
 
-	unsigned int	getProgram() const					{	return m_program;			}
-	unsigned int	getShader(unsigned int a_type)		{	return m_shaders[a_type];	}
+	unsigned int	GetProgram() const					{	return m_program;			}
+	unsigned int	GetShader(unsigned int a_type)		{	return m_shaders[a_type];	}
 
-	static ShaderProgram*	getCurrentBoundProgram()	{	return sm_boundProgram;		}
+	static ShaderProgram*	GetCurrentBoundProgram()	{	return sm_boundProgram;		}
 
 protected:
 

@@ -20,7 +20,9 @@ void Editor::Start()
 		return;
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 	m_window = glfwCreateWindow(m_width, m_height, "Defame Editor", NULL, NULL);
 	if (!m_window)
 	{
@@ -37,13 +39,13 @@ void Editor::Start()
 	// Audio!
 	audio = new Mp3();
 	audio->Load(L"..\\Editor\\resources\\TDIME.mp3");
+	m_demo = new Demo(m_width, m_height);
 	m_console = new Console(this);
 	m_toolbar = new Toolbar(this);
 	m_timeline = new Timeline(this);
 	m_curveeditor = new CurveEditor(this);
 	m_dopesheet = new DopeSheet(this);
 	m_demoview = new DemoView(this);
-	m_demo = new Demo(m_width, m_height);
 
 	glfwSetKeyCallback(m_window, glfw_key_callback);
 	glfwSetCharCallback(m_window, glfw_char_callback);

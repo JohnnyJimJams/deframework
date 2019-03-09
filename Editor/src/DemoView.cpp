@@ -6,14 +6,26 @@ DemoView::DemoView(Editor *peditor)
 {
 	editor = peditor;
 
-	//m_texture = new Texture2D("C:\\Users\\Alienware\\Desktop\\Demoscene\\deframework2_demoExample\\smiley.jpg");
 	m_texture = new Texture2D("..\\Editor\\resources\\smiley.jpg");
+
+	// setup shaderprogram
+	m_shader = new ShaderProgram();
+	m_shader->CompileFromFile(GL_VERTEX_SHADER, "..\\Editor\\resources\\layer.vert");
+	m_shader->CompileFromFile(GL_FRAGMENT_SHADER, "..\\Editor\\resources\\layer.frag");
+	m_shader->LinkProgram();
+	uniTime = m_shader->GetUniform("time");
+	uniResolution = m_shader->GetUniform("resolution");
+
+	// set up framebuffer
+	m_fbo = new FrameBuffer(editor->GetDemo()->GetWidth(), editor->GetDemo()->GetHeight());
+
 }
 
 DemoView::~DemoView()
 {
 	delete m_texture;
 	delete m_shader;
+	delete m_fbo;
 }
 
 void DemoView::TickUI(bool* p_open)
@@ -30,12 +42,20 @@ void DemoView::TickUI(bool* p_open)
 	ImVec2 windowSize = ImGui::GetContentRegionAvail();
 
 	// Draw background colour
-	draw_list->AddRectFilled(windowPos, ImVec2(windowPos.x + windowSize.x, windowPos.y + windowSize.y), col32);
-	//draw_list->AddCallback()
+	//draw_list->AddRectFilled(windowPos, ImVec2(windowPos.x + windowSize.x, windowPos.y + windowSize.y), col32);
 
-	//ImGui::InvisibleButton("demoviewcanvas", windowSize);	// allows for clicking, hovering without moving the window
+	m_fbo->Bind();
+	glClear(GL_COLOR_BUFFER_BIT || GL_DEPTH_BUFFER_BIT);
+	glDisable(GL_BLEND);
+	m_shader->Bind();
+	glUniform1f(uniTime, editor->GetMusicSecondsNow());
+	glUniform2f(uniResolution, editor->GetDemo()->GetWidth(), editor->GetDemo()->GetHeight());
+	editor->GetDemo()->DrawFullScreenQuad();
+	m_shader->Unbind();
+	m_fbo->Unbind();	
 
-	ImGui::Image((ImTextureID)m_texture->GetId(), windowSize);
+	// render texture from framebuffer
+	ImGui::Image((ImTextureID)m_fbo->GetColorTexture()->GetId(), windowSize);
 
 	ImGui::End();
 }

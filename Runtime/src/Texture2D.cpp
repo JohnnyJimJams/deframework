@@ -11,10 +11,11 @@ Texture2D::Texture2D(unsigned int width, unsigned int height, unsigned int chann
 	m_width = width;
 	m_channels = channels;
 	glTexImage2D(GL_TEXTURE_2D, 0, channels == 3 ? GL_RGB : GL_RGBA, width, height, 0, channels == 3 ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, data);
-	glGenerateMipmap(GL_TEXTURE_2D);
+	//glGenerateMipmap(GL_TEXTURE_2D);
+	//SetParamater(GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	SetParamater(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	SetParamater(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	SetParamater(GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	SetParamater(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	SetParamater(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 

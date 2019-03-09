@@ -3,6 +3,8 @@
 
 Demo::Demo(unsigned int width, unsigned int height)
 {
+	m_width = width;
+	m_height = height;
 	PrepareFullScreenQuad();
 }
 
@@ -22,9 +24,9 @@ unsigned int Demo::GetHeight()
 
 void Demo::DrawFullScreenQuad()
 {
-
-	glBindVertexArray(m_fullScreenQuadVAO);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(m_fullscreenQuadVAO);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glBindVertexArray(0);
 }
 
 Texture2D * Demo::GetCurrentFrame()
@@ -34,48 +36,27 @@ Texture2D * Demo::GetCurrentFrame()
 
 void Demo::PrepareFullScreenQuad()
 {
+	float quad[] =
+	{
+		-1.0f,-1.0f, 0.0f, 0.0f, 1.0f,
+		 1.0f,-1.0f, 0.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f, 0.0f, 0.0f, 0.0f,
 
-	// generate and bind the vao
-	glGenVertexArrays(1, &m_fullScreenQuadVAO);
-	glBindVertexArray(m_fullScreenQuadVAO);
+		-1.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+		 1.0f,-1.0f, 0.0f, 1.0f, 1.0f,
+		 1.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+	};
+	glGenVertexArrays(1, &m_fullscreenQuadVAO);
+	glBindVertexArray(m_fullscreenQuadVAO);
+	glGenBuffers(1, &m_fullscreenQuadVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, m_fullscreenQuadVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 5 * 6, quad, GL_STATIC_DRAW);
 
-	// generate and bind the vertex buffer object
-	glGenBuffers(1, &m_fullScreenQuadVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, m_fullScreenQuadVBO);
-
-	// data for a fullscreen quad (this time with texture coords)
-	GLfloat vertexData[] = {
-		//  X     Y     Z           U     V     
-		   1.0f, 1.0f, 0.0f,       1.0f, 1.0f, // vertex 0
-		  -1.0f, 1.0f, 0.0f,       0.0f, 1.0f, // vertex 1
-		   1.0f,-1.0f, 0.0f,       1.0f, 0.0f, // vertex 2
-		  -1.0f,-1.0f, 0.0f,       0.0f, 0.0f, // vertex 3
-	}; // 4 vertices with 5 components (floats) each
-
-	// fill with data
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 4 * 5, vertexData, GL_STATIC_DRAW);
-
-
-	// set up generic attrib pointers
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (char*)0 + 0 * sizeof(GLfloat));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0);
 
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (char*)0 + 3 * sizeof(GLfloat));
-
-
-	// generate and bind the index buffer object
-	glGenBuffers(1, &m_fullScreenQuadIBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_fullScreenQuadIBO);
-
-	GLuint indexData[] = {
-		0,1,2, // first triangle
-		2,1,3, // second triangle
-	};
-
-	// fill with data
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 2 * 3, indexData, GL_STATIC_DRAW);
-
-	// "unbind" vao
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, ((char*)0) + 12);
 	glBindVertexArray(0);
 }
+

@@ -17,7 +17,7 @@ ShaderProgram::~ShaderProgram()
 	glDeleteProgram(m_program);
 }
 
-void ShaderProgram::bind()
+void ShaderProgram::Bind()
 {
 	if (sm_boundProgram != nullptr)
 	{
@@ -30,7 +30,7 @@ void ShaderProgram::bind()
 	sm_boundProgram = this;
 }
 
-void ShaderProgram::unBind()
+void ShaderProgram::Unbind()
 {
 	if (sm_boundProgram == this)
 	{
@@ -40,7 +40,7 @@ void ShaderProgram::unBind()
 	}
 }
 
-void ShaderProgram::compileFromFile(unsigned int a_type, const char* a_filename)
+void ShaderProgram::CompileFromFile(unsigned int a_type, const char* a_filename)
 {
 	// open file for text reading
 	FILE* file = fopen(a_filename,"rb");
@@ -85,7 +85,7 @@ void ShaderProgram::compileFromFile(unsigned int a_type, const char* a_filename)
 #endif
 }
 
-void ShaderProgram::compileFromString(unsigned int a_type, const char* a_shader)
+void ShaderProgram::CompileFromString(unsigned int a_type, const char* a_shader)
 {
 	m_shaders[a_type] = glCreateShader(a_type);
 	glShaderSource(m_shaders[a_type], 1, &a_shader, 0);
@@ -110,7 +110,7 @@ void ShaderProgram::compileFromString(unsigned int a_type, const char* a_shader)
 //#endif
 }
 
-void ShaderProgram::compileFromStrings(unsigned int a_type, unsigned int a_stringCount, const char** a_shaderStrings)
+void ShaderProgram::CompileFromStrings(unsigned int a_type, unsigned int a_stringCount, const char** a_shaderStrings)
 {
 	m_shaders[a_type] = glCreateShader(a_type);
 	glShaderSource(m_shaders[a_type], a_stringCount, a_shaderStrings, 0);
@@ -135,7 +135,7 @@ void ShaderProgram::compileFromStrings(unsigned int a_type, unsigned int a_strin
 #endif
 }
 
-bool ShaderProgram::linkProgram()
+bool ShaderProgram::LinkProgram()
 {
 	m_program = glCreateProgram();
 	for (auto shader : m_shaders)
@@ -164,7 +164,7 @@ bool ShaderProgram::linkProgram()
 	return true;
 }
 
-int ShaderProgram::getUniform(const char* a_uniform)
+int ShaderProgram::GetUniform(const char* a_uniform)
 {
-	return glGetUniformLocation(m_program,a_uniform);
+	return glGetUniformLocation(m_program, a_uniform);
 }

@@ -2,6 +2,7 @@
 #include "imgui/imgui.h"
 #include "ShaderProgram.h"
 #include "Texture2D.h"
+#include "FrameBuffer.h"
 
 class Editor;
 
@@ -16,4 +17,7 @@ public:
 private:
 	ShaderProgram *m_shader;
 	Texture2D *m_texture;
+	FrameBuffer *m_fbo;
+	unsigned int uniTime;
+	unsigned int uniResolution;
 };

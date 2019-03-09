@@ -17,8 +17,8 @@ public:
 private:
 	unsigned int m_width;
 	unsigned int m_height;
-	GLuint m_fullScreenQuadVAO, m_fullScreenQuadVBO, m_fullScreenQuadIBO;
-
+	unsigned int m_fullscreenQuadVAO;
+	unsigned int m_fullscreenQuadVBO;
 
 	void PrepareFullScreenQuad();
 
