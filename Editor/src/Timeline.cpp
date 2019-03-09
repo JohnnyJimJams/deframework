@@ -28,12 +28,12 @@ void Timeline::TickUI(bool* p_open)
 	const ImVec2 s = ImGui::GetWindowSize();
 	const ImVec2 s1 = ImGui::GetWindowContentRegionMax();
 	
-	int left = p.x + 5;
-	int right = p.x + s.x - 20;
-	int ycentre = ((p.y + s.y - 40) - (p.y + 5)) * 0.5 + p.y + 5;
-	draw_list->AddRectFilled(ImVec2(left, ycentre - 5), ImVec2(right, ycentre + 5), col32);
+	int left = (int)p.x + 5;
+	int right = (int)p.x + (int)s.x - 20;
+	int ycentre = (int)(((p.y + s.y - 40) - (p.y + 5)) * 0.5) + (int)p.y + 5;
+	draw_list->AddRectFilled(ImVec2((float)left, (float)ycentre - 5.0f), ImVec2((float)right, (float)ycentre + 5.0f), col32);
 	double pos = editor->GetMusicSecondsNow() / editor->GetMusicSecondsTotal();
-	draw_list->AddCircleFilled(ImVec2(left + (right - left) * pos, ycentre), 10, IM_COL32_WHITE);
+	draw_list->AddCircleFilled(ImVec2((float)left + ((float)right - (float)left) * (float)pos, (float)ycentre), 10, IM_COL32_WHITE);
 
 	// Scrub time line on mouse down
 	ImVec2 canvas_size = ImGui::GetContentRegionAvail();

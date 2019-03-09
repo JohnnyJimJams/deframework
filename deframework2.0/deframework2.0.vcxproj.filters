@@ -140,9 +140,6 @@
     <ClInclude Include="..\Runtime\src\Texture2D.h">
       <Filter>Header Files\Runtime</Filter>
     </ClInclude>
-    <ClInclude Include="..\Editor\dep\stb_image.h">
-      <Filter>Header Files\3rd Party</Filter>
-    </ClInclude>
     <ClInclude Include="..\Runtime\src\Layer.h">
       <Filter>Header Files\Runtime</Filter>
     </ClInclude>
@@ -151,6 +148,15 @@
     </ClInclude>
     <ClInclude Include="..\Runtime\src\Demo.h">
       <Filter>Header Files\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\dep\json.hpp">
+      <Filter>Source Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\dep\stb_image.h">
+      <Filter>Source Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\dep\tiny_gltf.h">
+      <Filter>Source Files\3rd Party</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

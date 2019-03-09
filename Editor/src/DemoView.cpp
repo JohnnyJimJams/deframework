@@ -48,8 +48,8 @@ void DemoView::TickUI(bool* p_open)
 	glClear(GL_COLOR_BUFFER_BIT || GL_DEPTH_BUFFER_BIT);
 	glDisable(GL_BLEND);
 	m_shader->Bind();
-	glUniform1f(uniTime, editor->GetMusicSecondsNow());
-	glUniform2f(uniResolution, editor->GetDemo()->GetWidth(), editor->GetDemo()->GetHeight());
+	glUniform1f(uniTime, (float)editor->GetMusicSecondsNow());
+	glUniform2f(uniResolution, (float)editor->GetDemo()->GetWidth(), (float)editor->GetDemo()->GetHeight());
 	editor->GetDemo()->DrawFullScreenQuad();
 	m_shader->Unbind();
 	m_fbo->Unbind();	

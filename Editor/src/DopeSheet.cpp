@@ -16,7 +16,7 @@ DopeSheet::DopeSheet(Editor *peditor)
 	editor->GetConsole()->Log("Dump of keyframes - Bool\n");
 	std::vector<Keyframe> kf = animations[0].GetKeyframes();
 	editor->GetConsole()->Log("num keyframes: %d\n", kf.size());
-	for (int i = 0; i < kf.size(); i++)
+	for (unsigned int i = 0; i < kf.size(); i++)
 	{
 		editor->GetConsole()->Log("time: %f  value: %d\n", kf[i].time, kf[i].value.boolValue);
 	}
@@ -32,7 +32,7 @@ DopeSheet::DopeSheet(Editor *peditor)
 	editor->GetConsole()->Log("Dump of keyframes - Int\n");
 	kf = animations[1].GetKeyframes();
 	editor->GetConsole()->Log("num keyframes: %d\n", kf.size());
-	for (int i = 0; i < kf.size(); i++)
+	for (unsigned int i = 0; i < kf.size(); i++)
 	{
 		editor->GetConsole()->Log("time: %f  value: %d\n", kf[i].time, kf[i].value.intValue);
 	}
@@ -45,7 +45,7 @@ DopeSheet::DopeSheet(Editor *peditor)
 	editor->GetConsole()->Log("Dump of keyframes - float\n");
 	kf = animations[2].GetKeyframes();
 	editor->GetConsole()->Log("num keyframes: %d\n", kf.size());
-	for (int i = 0; i < kf.size(); i++)
+	for (unsigned int i = 0; i < kf.size(); i++)
 	{
 		editor->GetConsole()->Log("time: %f  value: %f\n", kf[i].time, kf[i].value.floatValue);
 	}
@@ -67,7 +67,7 @@ DopeSheet::DopeSheet(Editor *peditor)
 	editor->GetConsole()->Log("Dump of keyframes - Double\n");
 	kf = animations[3].GetKeyframes();
 	editor->GetConsole()->Log("num keyframes: %\n", kf.size());
-	for (int i = 0; i < kf.size(); i++)
+	for (unsigned int i = 0; i < kf.size(); i++)
 	{
 		editor->GetConsole()->Log("time: %f  value: %f\n", kf[i].time, kf[i].value.doubleValue);
 	}
@@ -97,7 +97,7 @@ void DopeSheet::TickUI(bool* p_open)
 	ImGui::Checkbox("keymebool", &keymebool);
 	ImGui::SliderInt("keymeint", &keymeint, 0, 10);
 	ImGui::SliderFloat("keymefloat", &keymefloat, -100.0f, 100.0f);
-	float dbl2flt = keymedouble;
+	float dbl2flt = (float)keymedouble;
 	ImGui::SliderFloat("keymedouble", &dbl2flt, -100.0f, 100.0f);
 
 	ImGui::End();

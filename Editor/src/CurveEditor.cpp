@@ -23,12 +23,12 @@ void CurveEditor::TickUI(bool* p_open)
 	const ImVec2 p = ImGui::GetCursorScreenPos();
 	const ImVec2 s = ImGui::GetWindowSize();
 	
-	int left = p.x + 5;
-	int right = p.x + s.x - 20;
-	int ycentre = ((p.y + s.y - 40) - (p.y + 5)) * 0.5 + p.y + 5;
+	int left = (int)p.x + 5;
+	int right = (int)p.x + (int)s.x - 20;
+	int ycentre = (int)((((int)p.y + (int)s.y - 40) - ((int)p.y + 5)) * 0.5) + (int)p.y + 5;
 	
 	// horizontal line
-	draw_list->AddRectFilled(ImVec2(left, ycentre), ImVec2(right, ycentre+1), col32);
+	draw_list->AddRectFilled(ImVec2((float)left, (float)ycentre), ImVec2((float)right, (float)ycentre + 1.0f), col32);
 
 	ImVec2 canvas_size = ImGui::GetContentRegionAvail();
 	ImGui::InvisibleButton("curveeditorcanvas", canvas_size);	// allows for clicking, hovering without moving the window
@@ -41,7 +41,7 @@ void CurveEditor::TickUI(bool* p_open)
 			double time2 = (x - left) / ((double)(right - left)) * editor->GetMusicSecondsTotal();
 			double y1 = animation->EvaluateDouble(time1, false);
 			double y2 = animation->EvaluateDouble(time2, false);
-			draw_list->AddLine(ImVec2(x-1, (float)y1 + ycentre), ImVec2(x, (float)y2 + ycentre), IM_COL32_WHITE);
+			draw_list->AddLine(ImVec2(x - 1.0f, (float)y1 + (float)ycentre), ImVec2((float)x, (float)y2 + (float)ycentre), IM_COL32_WHITE);
 		}
 	}
 
