@@ -3,6 +3,7 @@
 #include "ShaderProgram.h"
 #include "Texture2D.h"
 #include "FrameBuffer.h"
+#include "Mesh.h"
 
 class Editor;
 
@@ -20,4 +21,5 @@ private:
 	FrameBuffer *m_fbo;
 	unsigned int uniTime;
 	unsigned int uniResolution;
+	Mesh *m_mesh;
 };

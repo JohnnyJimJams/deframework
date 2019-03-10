@@ -13,12 +13,6 @@
 #include "Demo.h"
 #include <GL/gl3w.h>    // Initialize with gl3wInit()
 #include <GLFW/glfw3.h>
-/*
-#define TINYGLTF_IMPLEMENTATION
-#define STB_IMAGE_IMPLEMENTATION
-#define TINYGLTF_NO_STB_IMAGE_WRITE
-#include "tiny_gltf.h"
-*/
 
 enum EditorMode { Edit, Play };
 

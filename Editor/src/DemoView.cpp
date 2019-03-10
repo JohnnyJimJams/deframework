@@ -19,6 +19,7 @@ DemoView::DemoView(Editor *peditor)
 	// set up framebuffer
 	m_fbo = new FrameBuffer(editor->GetDemo()->GetWidth(), editor->GetDemo()->GetHeight());
 
+	m_mesh = new Mesh("..\\Editor\\resources\\suzanne.glb");
 }
 
 DemoView::~DemoView()
@@ -26,6 +27,7 @@ DemoView::~DemoView()
 	delete m_texture;
 	delete m_shader;
 	delete m_fbo;
+	delete m_mesh;
 }
 
 void DemoView::TickUI(bool* p_open)

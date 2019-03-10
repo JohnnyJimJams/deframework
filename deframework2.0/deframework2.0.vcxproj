@@ -150,6 +150,7 @@
     <ClCompile Include="..\Runtime\src\FrameBuffer.cpp" />
     <ClCompile Include="..\Runtime\src\Keyframe.cpp" />
     <ClCompile Include="..\Runtime\src\Layer.cpp" />
+    <ClCompile Include="..\Runtime\src\Mesh.cpp" />
     <ClCompile Include="..\Runtime\src\MP3.cpp" />
     <ClCompile Include="..\Runtime\src\ShaderProgram.cpp" />
     <ClCompile Include="..\Runtime\src\Texture2D.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="..\Runtime\src\FrameBuffer.h" />
     <ClInclude Include="..\Runtime\src\Keyframe.h" />
     <ClInclude Include="..\Runtime\src\Layer.h" />
+    <ClInclude Include="..\Runtime\src\Mesh.h" />
     <ClInclude Include="..\Runtime\src\MP3.h" />
     <ClInclude Include="..\Runtime\src\ShaderProgram.h" />
     <ClInclude Include="..\Runtime\src\Texture2D.h" />
