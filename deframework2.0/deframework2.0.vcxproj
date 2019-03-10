@@ -146,6 +146,7 @@
     <ClCompile Include="..\Editor\src\Toolbar.cpp" />
     <ClCompile Include="..\Runtime\dep\gl3w\GL\gl3w.c" />
     <ClCompile Include="..\Runtime\src\Animation.cpp" />
+    <ClCompile Include="..\Runtime\src\Camera.cpp" />
     <ClCompile Include="..\Runtime\src\Demo.cpp" />
     <ClCompile Include="..\Runtime\src\FrameBuffer.cpp" />
     <ClCompile Include="..\Runtime\src\Keyframe.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="..\Runtime\dep\stb_image.h" />
     <ClInclude Include="..\Runtime\dep\tiny_gltf.h" />
     <ClInclude Include="..\Runtime\src\Animation.h" />
+    <ClInclude Include="..\Runtime\src\Camera.h" />
     <ClInclude Include="..\Runtime\src\Demo.h" />
     <ClInclude Include="..\Runtime\src\FrameBuffer.h" />
     <ClInclude Include="..\Runtime\src\Keyframe.h" />

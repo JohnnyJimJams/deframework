@@ -11,7 +11,7 @@ Mesh::Mesh(const char * filename)
 	bool ret = loader.LoadBinaryFromFile(&m_model, &err, &warn, filename);
 	if (ret)
 	{
-
+		// setup VAO from loaded model
 	}
 	else
 	{

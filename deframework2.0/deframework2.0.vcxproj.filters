@@ -105,6 +105,9 @@
     <ClCompile Include="..\Runtime\src\Mesh.cpp">
       <Filter>Source Files\Runtime</Filter>
     </ClCompile>
+    <ClCompile Include="..\Runtime\src\Camera.cpp">
+      <Filter>Source Files\Runtime</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Editor\src\Console.h">
@@ -162,6 +165,9 @@
       <Filter>Source Files\3rd Party</Filter>
     </ClInclude>
     <ClInclude Include="..\Runtime\src\Mesh.h">
+      <Filter>Header Files\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\src\Camera.h">
       <Filter>Header Files\Runtime</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,6 +4,7 @@
 #include "Texture2D.h"
 #include "FrameBuffer.h"
 #include "Mesh.h"
+#include "Camera.h"
 
 class Editor;
 
@@ -16,10 +17,17 @@ public:
 	Editor *editor;
 	void TickUI(bool* p_open = NULL);
 private:
-	ShaderProgram *m_shader;
+	ShaderProgram *m_shaderFullScreenQuad;
+	unsigned int uniFullScreenQuadTime;
+	unsigned int uniFullScreenQuadResolution;
+	
+	ShaderProgram *m_shaderDefault;
+	unsigned int uniDefaultTime;
+	unsigned int uniDefaultResolution;
+	unsigned int uniDefaultProjectionView;
+
 	Texture2D *m_texture;
 	FrameBuffer *m_fbo;
-	unsigned int uniTime;
-	unsigned int uniResolution;
 	Mesh *m_mesh;
+	Camera *m_camera;
 };

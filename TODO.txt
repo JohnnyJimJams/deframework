@@ -32,11 +32,16 @@ Assets
  - Mp3
  - Texture
  - Shaders
+Mesh
+glTF
 
-TODO!
+NOTES
 =====
 * All Initialization happens at the start of the demo, this means scrubbing will work without issues.
 * Eigen as the maths lib
+
+TODO!
+=====
 
 Bugs!
 =====
@@ -45,6 +50,16 @@ Windows 10 display scaling isn't taking into account, the whole editor is too sm
 
 Runtime Sprint
 ==============
+ - Use Eigen to setup model, view (camera) and projection matrices
+ - Setup mesh to create VAO from loaded model
+ - Create shader that uses simple diffuse lighting
+ - Render
+
+Rendering Template
+ - Component - Mesh, Material
+
+ - Entity (Name, Transform, Active, Visible, List of Components)
+
 Layers / FrameBuffers
  - Opacity
  - Enabled
@@ -54,10 +69,7 @@ Layers / FrameBuffers
 Viewport (Editor)
 
 Assets
- - glTF
  - Materials
-
-Mesh
 
 Mesh Animation
 
