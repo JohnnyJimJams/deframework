@@ -34,6 +34,11 @@ Assets
  - Shaders
 Mesh
 glTF
+ - Use Eigen to setup model, view (camera) and projection matrices *** FAIL *** swap to glm as docs and examples are better
+ - Setup mesh to create VAO from loaded model
+ - Create shader that uses simple diffuse lighting
+ - Render
+
 
 NOTES
 =====
@@ -50,10 +55,7 @@ Windows 10 display scaling isn't taking into account, the whole editor is too sm
 
 Runtime Sprint
 ==============
- - Use Eigen to setup model, view (camera) and projection matrices
- - Setup mesh to create VAO from loaded model
- - Create shader that uses simple diffuse lighting
- - Render
+Swap Eigen for GLM, Keyframe, Camera, Demoview
 
 Rendering Template
  - Component - Mesh, Material

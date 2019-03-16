@@ -1,6 +1,10 @@
 #include "DemoView.h"
 #include "Editor.h"
 #include "Texture2D.h"
+#include <glm/mat4x4.hpp> // glm::mat4
+#include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 DemoView::DemoView(Editor *peditor)
 {
@@ -22,7 +26,6 @@ DemoView::DemoView(Editor *peditor)
 	m_shaderDefault->LinkProgram();
 	uniDefaultTime = m_shaderDefault->GetUniform("time");
 	uniDefaultResolution = m_shaderDefault->GetUniform("resolution");
-	uniDefaultProjectionView = m_shaderDefault->GetUniform("projectionview");
 
 	// set up framebuffer
 	m_fbo = new FrameBuffer(editor->GetDemo()->GetWidth(), editor->GetDemo()->GetHeight());
@@ -30,6 +33,8 @@ DemoView::DemoView(Editor *peditor)
 	m_mesh = new Mesh("..\\Editor\\resources\\suzanne.glb");
 
 	m_camera = new Camera();
+
+	editor->GetConsole()->Log(m_mesh->GetLog().c_str());
 }
 
 DemoView::~DemoView()
@@ -59,20 +64,27 @@ void DemoView::TickUI(bool* p_open)
 
 	m_fbo->Bind();
 
-	m_shaderFullScreenQuad->Bind();
-	glUniform1f(uniFullScreenQuadTime, (float)editor->GetMusicSecondsNow());
-	glUniform2f(uniFullScreenQuadResolution, (float)editor->GetDemo()->GetWidth(), (float)editor->GetDemo()->GetHeight());
-	editor->GetDemo()->DrawFullScreenQuad();
-	m_shaderFullScreenQuad->Unbind();
+	//m_shaderFullScreenQuad->Bind();
+	//glUniform1f(uniFullScreenQuadTime, (float)editor->GetMusicSecondsNow());
+	//glUniform2f(uniFullScreenQuadResolution, (float)editor->GetDemo()->GetWidth(), (float)editor->GetDemo()->GetHeight());
+	//editor->GetDemo()->DrawFullScreenQuad();
+	//m_shaderFullScreenQuad->Unbind();
 
-	/*
-	glClear(GL_COLOR_BUFFER_BIT || GL_DEPTH_BUFFER_BIT);
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
 	m_shaderDefault->Bind();
 	// Setup uniforms (View, Projection)
-
+	glm::mat4 Model = glm::mat4(1.0f);
+	Model = glm::rotate(Model, (float)editor->GetMusicSecondsNow(), glm::vec3(1.0f, 0.0f, 0.0f));
+	glm::mat4 Projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 1000.f);
+	glm::mat4 View = glm::lookAt(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	glUniformMatrix4fv(m_shaderDefault->GetUniform("model"), 1, GL_FALSE, glm::value_ptr(Model));
+	glUniformMatrix4fv(m_shaderDefault->GetUniform("view"), 1, GL_FALSE, glm::value_ptr(View));
+	glUniformMatrix4fv(m_shaderDefault->GetUniform("projection"), 1, GL_FALSE, glm::value_ptr(Projection));
 	m_mesh->Draw();
+	glDisable(GL_DEPTH_TEST);
 	m_shaderDefault->Unbind();
-	*/
 
 	m_fbo->Unbind();	
 

@@ -3,10 +3,10 @@
 KeyframeHandle::KeyframeHandle()
 {
 	type = KeyframeHandleType::AUTO;
-	position = Eigen::Vector2f(0, 0);
+	position = glm::vec2(0, 0);
 }
 
-KeyframeHandle::KeyframeHandle(KeyframeHandleType pType, Eigen::Vector2f pPosition)
+KeyframeHandle::KeyframeHandle(KeyframeHandleType pType, glm::vec2 pPosition)
 {
 	type = pType;
 	position = pPosition;

@@ -1,5 +1,5 @@
 #pragma once
-#include "Eigen/Core"
+#include "glm/vec2.hpp"
 
 enum KeyframeHandleType
 {
@@ -9,9 +9,9 @@ enum KeyframeHandleType
 struct KeyframeHandle
 {
 	KeyframeHandle();
-	KeyframeHandle(KeyframeHandleType pType, Eigen::Vector2f pPosition);
+	KeyframeHandle(KeyframeHandleType pType, glm::vec2 pPosition);
 	KeyframeHandleType type;
-	Eigen::Vector2f position;
+	glm::vec2 position;
 };
 
 enum PropertyType

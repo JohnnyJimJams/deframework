@@ -19,7 +19,7 @@ FrameBuffer::FrameBuffer(unsigned int width, unsigned int height)
 
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 	{
-
+		int i = 0;
 	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
