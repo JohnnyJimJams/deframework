@@ -2,6 +2,7 @@
 #include "imgui/imgui.h"
 #include "Animation.h"
 #include <vector>
+#include "Layer.h"
 
 class Editor;
 
@@ -21,4 +22,5 @@ public:
 	float keymefloat;
 	double keymedouble;
 private:
+	std::vector<Layer *> m_selectedLayers;
 };

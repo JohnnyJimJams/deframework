@@ -108,6 +108,9 @@
     <ClCompile Include="..\Runtime\src\Camera.cpp">
       <Filter>Source Files\Runtime</Filter>
     </ClCompile>
+    <ClCompile Include="..\Runtime\src\Entity.cpp">
+      <Filter>Source Files\Runtime</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Editor\src\Console.h">
@@ -168,6 +171,9 @@
       <Filter>Header Files\Runtime</Filter>
     </ClInclude>
     <ClInclude Include="..\Runtime\src\Camera.h">
+      <Filter>Header Files\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\src\Entity.h">
       <Filter>Header Files\Runtime</Filter>
     </ClInclude>
   </ItemGroup>

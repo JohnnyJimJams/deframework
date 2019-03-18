@@ -1,5 +1,7 @@
-#include "DopeSheet.h"
+﻿#include "DopeSheet.h"
 #include "Editor.h"
+
+using namespace std;
 
 DopeSheet::DopeSheet(Editor *peditor)
 {
@@ -89,16 +91,110 @@ void DopeSheet::TickUI(bool* p_open)
 		return;
 	}
 
-	animations[0].EvaluateBool(editor->GetMusicSecondsNow());
-	animations[1].EvaluateInt(editor->GetMusicSecondsNow());
-	animations[2].EvaluateFloat(editor->GetMusicSecondsNow());
-	animations[3].EvaluateDouble(editor->GetMusicSecondsNow());
+	// Dopesheet buttons
+	if (ImGui::Button("Add Layer"))
+	{
+		editor->GetDemo()->AddLayer();
+	}
+	ImGui::SameLine();
+	if (ImGui::Button("Delete Layer/s"))
+	{
+		if (!m_selectedLayers.empty())
+		{ 
+			// modal are you sure?
+			ImGui::OpenPopup("Delete Layers?");
+		}
+	}
+	ImGui::SameLine();
+	if (ImGui::ArrowButton("##up", ImGuiDir_Up)) 
+	{
+		if (m_selectedLayers.size() == 1)
+		{
+			string nameSelected = m_selectedLayers[0]->name;
+			int index = editor->GetDemo()->GetLayerIndex(nameSelected);
+			if (index > 0) // -1 means not found, 0 is already at the top
+			{
+				vector<Layer *> &layers = editor->GetDemo()->GetLayers();
+				swap(layers[index], layers[index - 1]);
+			}
+		}
+	}
+	ImGui::SameLine();
+	if (ImGui::ArrowButton("##down", ImGuiDir_Down)) 
+	{ 
+		if (m_selectedLayers.size() == 1)
+		{
+			string nameSelected = m_selectedLayers[0]->name;
+			int index = editor->GetDemo()->GetLayerIndex(nameSelected);
+			vector<Layer *> &layers = editor->GetDemo()->GetLayers();
+			if (index > -1 && index < (layers.size()-1)) // -1 means not found, layers.size()-1 is already at the bottom
+			{
+				swap(layers[index], layers[index + 1]);
+			}
+		}
+	}
 
-	ImGui::Checkbox("keymebool", &keymebool);
-	ImGui::SliderInt("keymeint", &keymeint, 0, 10);
-	ImGui::SliderFloat("keymefloat", &keymefloat, -100.0f, 100.0f);
-	float dbl2flt = (float)keymedouble;
-	ImGui::SliderFloat("keymedouble", &dbl2flt, -100.0f, 100.0f);
+	if (ImGui::BeginPopupModal("Delete Layers?", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+	{
+		ImGui::Text("This will delete all selected layers and their children.\nAre you sure?!\n\n");
+		ImGui::Separator();
+
+		if (ImGui::Button("Delete", ImVec2(120, 0))) { 
+			editor->GetDemo()->DeleteLayers(&m_selectedLayers);
+			m_selectedLayers.clear();
+			ImGui::CloseCurrentPopup(); 
+		}
+		ImGui::SetItemDefaultFocus();
+		ImGui::SameLine();
+		if (ImGui::Button("Cancel", ImVec2(120, 0))) { ImGui::CloseCurrentPopup(); }
+		ImGui::EndPopup();
+	}
+
+	// List of layers as trees
+	auto layers = editor->GetDemo()->GetLayers();
+	int node_clicked = -1;
+	int i = 0;
+	for (auto layer : layers)
+	{
+		ImGuiTreeNodeFlags node_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+		if (std::find(m_selectedLayers.begin(), m_selectedLayers.end(), layer) != m_selectedLayers.end())
+		{
+			node_flags = node_flags | ImGuiTreeNodeFlags_Selected;
+		}
+		
+		bool node_open = ImGui::TreeNodeEx((void*)(intptr_t)i, node_flags, layer->name.c_str(), i);
+		if (node_open)
+		{
+			ImGui::Text(layer->name.c_str());
+			ImGui::TreePop();
+		}
+
+		if (ImGui::IsItemClicked())
+			node_clicked = i;
+
+		i++;
+	}
+	if (node_clicked != -1)
+	{
+		// Update selection state. Process outside of tree loop to avoid visual inconsistencies during the clicking-frame.
+		if (ImGui::GetIO().KeyCtrl)
+			m_selectedLayers.push_back(layers[node_clicked]);
+		else
+		{
+			m_selectedLayers.clear();
+			m_selectedLayers.push_back(layers[node_clicked]);
+		}
+	}
+	//animations[0].EvaluateBool(editor->GetMusicSecondsNow());
+	//animations[1].EvaluateInt(editor->GetMusicSecondsNow());
+	//animations[2].EvaluateFloat(editor->GetMusicSecondsNow());
+	//animations[3].EvaluateDouble(editor->GetMusicSecondsNow());
+
+	//ImGui::Checkbox("keymebool", &keymebool);
+	//ImGui::SliderInt("keymeint", &keymeint, 0, 10);
+	//ImGui::SliderFloat("keymefloat", &keymefloat, -100.0f, 100.0f);
+	//float dbl2flt = (float)keymedouble;
+	//ImGui::SliderFloat("keymedouble", &dbl2flt, -100.0f, 100.0f);
 
 	ImGui::End();
 }

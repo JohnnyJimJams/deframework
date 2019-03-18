@@ -2,7 +2,7 @@
 #include "imgui/imgui.h"
 #include "ShaderProgram.h"
 #include "Texture2D.h"
-#include "FrameBuffer.h"
+#include "Layer.h"
 #include "Mesh.h"
 #include "Camera.h"
 
@@ -25,9 +25,8 @@ private:
 	unsigned int uniDefaultTime;
 	unsigned int uniDefaultResolution;
 	unsigned int uniDefaultProjectionView;
-
+	Layer *m_layer;
 	Texture2D *m_texture;
-	FrameBuffer *m_fbo;
 	Mesh *m_mesh;
 	Camera *m_camera;
 };

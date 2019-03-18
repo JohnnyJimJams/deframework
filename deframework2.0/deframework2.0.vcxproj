@@ -148,6 +148,7 @@
     <ClCompile Include="..\Runtime\src\Animation.cpp" />
     <ClCompile Include="..\Runtime\src\Camera.cpp" />
     <ClCompile Include="..\Runtime\src\Demo.cpp" />
+    <ClCompile Include="..\Runtime\src\Entity.cpp" />
     <ClCompile Include="..\Runtime\src\FrameBuffer.cpp" />
     <ClCompile Include="..\Runtime\src\Keyframe.cpp" />
     <ClCompile Include="..\Runtime\src\Layer.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="..\Runtime\src\Animation.h" />
     <ClInclude Include="..\Runtime\src\Camera.h" />
     <ClInclude Include="..\Runtime\src\Demo.h" />
+    <ClInclude Include="..\Runtime\src\Entity.h" />
     <ClInclude Include="..\Runtime\src\FrameBuffer.h" />
     <ClInclude Include="..\Runtime\src\Keyframe.h" />
     <ClInclude Include="..\Runtime\src\Layer.h" />

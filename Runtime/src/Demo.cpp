@@ -1,5 +1,8 @@
 #include "Layer.h"
 #include "Demo.h"
+#include <string>
+
+using namespace std;
 
 Demo::Demo(unsigned int width, unsigned int height)
 {
@@ -32,6 +35,78 @@ void Demo::DrawFullScreenQuad()
 Texture2D * Demo::GetCurrentFrame()
 {
 	return nullptr;
+}
+
+Layer *Demo::AddLayer(std::string name)
+{
+	// check if layer exists with this name
+	for (auto l : m_layers)
+	{
+		if (l->name == name)
+		{
+			return l;
+		}
+	}
+	m_layers.push_back(new Layer(m_width, m_height, name));
+	
+	return m_layers.back();
+}
+
+Layer * Demo::AddLayer()
+{
+	int layerNum = 1;
+	string name = "layer" + to_string(layerNum);
+
+	bool nameExists;
+	do 
+	{
+		if (nameExists = LayerNameExists(name))
+		{
+			layerNum++;
+			name = "layer" + to_string(layerNum);
+		}
+	} while (nameExists);
+
+	return AddLayer(name);
+}
+
+void Demo::DeleteLayers(std::vector<Layer*>* layersToDelete)
+{
+	for (auto layerToDelete : *layersToDelete)
+	{
+		string nameToDelete = layerToDelete->name;
+		int index = GetLayerIndex(nameToDelete);
+		if (index > -1)
+		{
+			m_layers.erase(m_layers.begin() + index);
+		}
+	}
+}
+
+int Demo::GetLayerIndex(string name)
+{
+	int index = -1;
+	for (unsigned int i = 0; i < m_layers.size(); i++)
+	{
+		if (m_layers[i]->name == name)
+		{
+			index = i;
+			break;
+		}
+	}
+	return index;
+}
+
+bool Demo::LayerNameExists(string name)
+{
+	for (auto l : m_layers)
+	{
+		if (l->name == name)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void Demo::PrepareFullScreenQuad()

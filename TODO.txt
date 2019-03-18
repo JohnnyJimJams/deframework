@@ -38,8 +38,12 @@ glTF
  - Setup mesh to create VAO from loaded model
  - Create shader that uses simple diffuse lighting
  - Render
+ - Layers
+ - Layer Selection
+ - Create Layer
+ - Delete Layer
 
-
+ - Order Layer
 NOTES
 =====
 * All Initialization happens at the start of the demo, this means scrubbing will work without issues.
@@ -47,7 +51,20 @@ NOTES
 
 TODO!
 =====
+ - Entities 
+ - Entity Selection
+ - Create Entity
+ - Delete Entity
+ - Drag and drop parenting
 
+ - Properties
+ - Show keyframes for selected
+ - Add keyframe for selected
+ - Deleted keyframe for selected
+
+ - Load
+ - Save
+ 
 Bugs!
 =====
 Reducing size of curve editor window crashes application

@@ -1,11 +1,12 @@
 #include "Layer.h"
 #include <GL/gl3w.h> 
 
-Layer::Layer(unsigned int width, unsigned int height)
+Layer::Layer(unsigned int width, unsigned int height, std::string pname)
 {
 	m_frameBuffer = new FrameBuffer(width, height);
 	m_width = width;
 	m_height = height;
+	name = pname;
 }
 
 Layer::~Layer()
