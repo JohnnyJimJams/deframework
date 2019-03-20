@@ -127,9 +127,12 @@ void DopeSheet::TickUI(bool* p_open)
 			string nameSelected = m_selectedLayers[0]->name;
 			int index = editor->GetDemo()->GetLayerIndex(nameSelected);
 			vector<Layer *> &layers = editor->GetDemo()->GetLayers();
-			if (index > -1 && index < (layers.size()-1)) // -1 means not found, layers.size()-1 is already at the bottom
+			if (index > -1) // -1 means not found, layers.size()-1 is already at the bottom
 			{
-				swap(layers[index], layers[index + 1]);
+				if (index < ((int)layers.size() - 1))
+				{
+					swap(layers[index], layers[index + 1]);
+				}
 			}
 		}
 	}

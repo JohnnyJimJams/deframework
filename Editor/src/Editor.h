@@ -10,6 +10,7 @@
 #include "DopeSheet.h"
 #include "CurveEditor.h"
 #include "DemoView.h"
+#include "PropertyEditor.h"
 #include "Demo.h"
 #include <GL/gl3w.h>    // Initialize with gl3wInit()
 #include <GLFW/glfw3.h>
@@ -34,6 +35,7 @@ public:
 	Console *GetConsole();
 	CurveEditor *GetCurveEditor();
 	Demo *GetDemo();
+	PropertyEditor *GetPropertyEditor() { return m_propertyeditor; }
 
 private:
 	GLFWwindow* m_window;
@@ -42,8 +44,11 @@ private:
 	Timeline *m_timeline;
 	DopeSheet *m_dopesheet;
 	CurveEditor *m_curveeditor;
+	PropertyEditor *m_propertyeditor;
+
 	DemoView *m_demoview;
 	Demo *m_demo;
+
 	unsigned int m_width;
 	unsigned int m_height;
 	GLfloat m_backgroundColor[3] = { .02f, .02f, 0.05f };

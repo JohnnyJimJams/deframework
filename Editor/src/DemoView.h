@@ -29,4 +29,5 @@ private:
 	Texture2D *m_texture;
 	Mesh *m_mesh;
 	Camera *m_camera;
+	Entity *m_entity;
 };

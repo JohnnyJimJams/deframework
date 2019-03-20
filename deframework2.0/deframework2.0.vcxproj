@@ -142,6 +142,7 @@
     <ClCompile Include="..\Editor\src\DopeSheet.cpp" />
     <ClCompile Include="..\Editor\src\Editor.cpp" />
     <ClCompile Include="..\Editor\src\main.cpp" />
+    <ClCompile Include="..\Editor\src\PropertyEditor.cpp" />
     <ClCompile Include="..\Editor\src\Timeline.cpp" />
     <ClCompile Include="..\Editor\src\Toolbar.cpp" />
     <ClCompile Include="..\Runtime\dep\gl3w\GL\gl3w.c" />
@@ -163,6 +164,7 @@
     <ClInclude Include="..\Editor\src\DemoView.h" />
     <ClInclude Include="..\Editor\src\DopeSheet.h" />
     <ClInclude Include="..\Editor\src\Editor.h" />
+    <ClInclude Include="..\Editor\src\PropertyEditor.h" />
     <ClInclude Include="..\Editor\src\Timeline.h" />
     <ClInclude Include="..\Editor\src\Toolbar.h" />
     <ClInclude Include="..\Runtime\dep\json.hpp" />

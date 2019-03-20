@@ -1,10 +1,10 @@
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
+
 #include "DemoView.h"
 #include "Editor.h"
 #include "Texture2D.h"
-#include <glm/mat4x4.hpp> // mat4
-#include <glm/gtc/matrix_transform.hpp> // translate, rotate, scale, perspective
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include "Entity.h"
 
 using namespace glm;
 
@@ -38,6 +38,9 @@ DemoView::DemoView(Editor *peditor)
 	m_camera = new Camera();
 
 	editor->GetConsole()->Log(m_mesh->GetLog().c_str());
+
+	m_entity = new Entity();
+	editor->GetPropertyEditor()->SetEntity(m_entity);
 }
 
 DemoView::~DemoView()
@@ -46,6 +49,7 @@ DemoView::~DemoView()
 	delete m_shaderFullScreenQuad;
 	delete m_mesh;
 	delete m_camera;
+	delete m_entity;
 }
 
 void DemoView::TickUI(bool* p_open)
@@ -74,9 +78,10 @@ void DemoView::TickUI(bool* p_open)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		m_shaderDefault->Bind();
 			glEnable(GL_DEPTH_TEST);
-			mat4 Model = mat4(1.0f);
-			Model = rotate(Model, radians(180.0f), vec3(0.0f, 0.0f, 1.0f));
-			Model = rotate(Model, (float)editor->GetMusicSecondsNow() + 90.0f, vec3(1.0f, 0.0f, 0.0f));
+			//mat4 Model = mat4(1.0f);
+			//Model = rotate(Model, radians(180.0f), vec3(0.0f, 0.0f, 1.0f));
+			//Model = rotate(Model, (float)editor->GetMusicSecondsNow() + 90.0f, vec3(1.0f, 0.0f, 0.0f));
+			mat4 Model = m_entity->GetModelMatrix();
 			glUniformMatrix4fv(m_shaderDefault->GetUniform("model"), 1, GL_FALSE, value_ptr(Model));
 
 			mat4 Projection = perspective(radians(45.0f), (float)editor->GetWidth() / (float)editor->GetHeight(), 0.1f, 1000.f);

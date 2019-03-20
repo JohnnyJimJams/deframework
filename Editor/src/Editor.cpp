@@ -45,6 +45,8 @@ void Editor::Start()
 	m_timeline = new Timeline(this);
 	m_curveeditor = new CurveEditor(this);
 	m_dopesheet = new DopeSheet(this);
+	m_propertyeditor = new PropertyEditor(this);
+
 	m_demoview = new DemoView(this);
 
 	glfwSetKeyCallback(m_window, glfw_key_callback);
@@ -101,6 +103,7 @@ void Editor::Start()
 	delete m_curveeditor;
 	delete m_dopesheet;
 	delete m_demoview;
+	delete m_propertyeditor;
 	delete m_demo;
 
 	ImGui_ImplOpenGL3_Shutdown();
@@ -199,6 +202,7 @@ void Editor::TickUI()
 	m_dopesheet->TickUI();
 	m_curveeditor->TickUI();
 	m_demoview->TickUI();
+	m_propertyeditor->TickUI();
 }
 
 void Editor::glfw_error_callback(int error, const char * description)

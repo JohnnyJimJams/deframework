@@ -111,6 +111,9 @@
     <ClCompile Include="..\Runtime\src\Entity.cpp">
       <Filter>Source Files\Runtime</Filter>
     </ClCompile>
+    <ClCompile Include="..\Editor\src\PropertyEditor.cpp">
+      <Filter>Source Files\Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Editor\src\Console.h">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="..\Runtime\src\Entity.h">
       <Filter>Header Files\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Editor\src\PropertyEditor.h">
+      <Filter>Header Files\Editor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
