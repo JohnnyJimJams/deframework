@@ -4,7 +4,6 @@
 #include "DemoView.h"
 #include "Editor.h"
 #include "Texture2D.h"
-#include "Entity.h"
 
 using namespace glm;
 
@@ -32,24 +31,21 @@ DemoView::DemoView(Editor *peditor)
 	// set up framebuffer
 	m_layer = editor->GetDemo()->AddLayer("layer1");
 
-
-	m_mesh = new Mesh("..\\Editor\\resources\\suzanne.glb");
-
 	m_camera = new Camera();
 
-	editor->GetConsole()->Log(m_mesh->GetLog().c_str());
-
-	m_entity = new Entity();
-	editor->GetPropertyEditor()->SetEntity(m_entity);
+	m_emesh = new EMesh();
+	//auto mesh = static_cast<EMesh *>(m_entity);
+	m_emesh->GetMesh()->Load("..\\Editor\\resources\\suzanne.glb");
+	editor->GetConsole()->Log(m_emesh->GetMesh()->GetLog().c_str());
+	editor->GetPropertyEditor()->SetEntity(m_emesh);
 }
 
 DemoView::~DemoView()
 {
 	delete m_texture;
 	delete m_shaderFullScreenQuad;
-	delete m_mesh;
 	delete m_camera;
-	delete m_entity;
+	delete m_emesh;
 }
 
 void DemoView::TickUI(bool* p_open)
@@ -78,10 +74,7 @@ void DemoView::TickUI(bool* p_open)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		m_shaderDefault->Bind();
 			glEnable(GL_DEPTH_TEST);
-			//mat4 Model = mat4(1.0f);
-			//Model = rotate(Model, radians(180.0f), vec3(0.0f, 0.0f, 1.0f));
-			//Model = rotate(Model, (float)editor->GetMusicSecondsNow() + 90.0f, vec3(1.0f, 0.0f, 0.0f));
-			mat4 Model = m_entity->GetModelMatrix();
+			mat4 Model = m_emesh->GetModelMatrix();
 			glUniformMatrix4fv(m_shaderDefault->GetUniform("model"), 1, GL_FALSE, value_ptr(Model));
 
 			mat4 Projection = perspective(radians(45.0f), (float)editor->GetWidth() / (float)editor->GetHeight(), 0.1f, 1000.f);
@@ -89,7 +82,8 @@ void DemoView::TickUI(bool* p_open)
 			glUniformMatrix4fv(m_shaderDefault->GetUniform("view"), 1, GL_FALSE, value_ptr(View));
 			glUniformMatrix4fv(m_shaderDefault->GetUniform("projection"), 1, GL_FALSE, value_ptr(Projection));
 
-			m_mesh->Draw();
+			m_emesh->GetMesh()->Draw();
+
 			glDisable(GL_DEPTH_TEST);
 		m_shaderDefault->Unbind();
 	m_layer->Unbind();	

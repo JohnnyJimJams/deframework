@@ -1,10 +1,7 @@
-#ifndef __ENTITY_H_
-#define __ENTITY_H_
-
-#include <glm/glm.hpp>
-#include <glm/ext.hpp>
-#include <string>
-
+#pragma once
+#include "Mesh.h"
+#include "Entity.h"
+/*
 class Entity
 {
 public:
@@ -20,7 +17,16 @@ public:
 	void SetEulerAngles(glm::vec3 euler);
 	virtual std::string GetType() = 0;
 protected:
-	bool ScreenSpace;
-};
+	bool ScreenSpace;*/
 
-#endif // __ENTITY_H_
+class EMesh: public Entity
+{
+public:
+	EMesh();
+	~EMesh();
+	std::string GetType() { return "Mesh"; }
+	Mesh *GetMesh() { return m_mesh; }
+	void SetMesh(Mesh *mesh) { m_mesh = mesh; }
+protected:
+	Mesh *m_mesh;
+};

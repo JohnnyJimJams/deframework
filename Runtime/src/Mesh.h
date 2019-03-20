@@ -10,11 +10,12 @@
 class Mesh
 {
 public:
-
+	Mesh();
 	Mesh(const char * filename);
 	~Mesh();
 	void Draw();
 	std::string GetLog() { return m_log; }
+	void Load(const char * filename);
 private:
 	void BindModel();
 	void BindModelNodes(std::map<int, GLuint> vbos, tinygltf::Node &node);
@@ -24,6 +25,7 @@ private:
 	tinygltf::Model m_model;
 	unsigned int m_VAO;
 	std::string m_log;
+	bool hasMesh;
 };
 
 #endif // __MESH_H_

@@ -114,6 +114,9 @@
     <ClCompile Include="..\Editor\src\PropertyEditor.cpp">
       <Filter>Source Files\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="..\Runtime\src\EMesh.cpp">
+      <Filter>Source Files\Runtime</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Editor\src\Console.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="..\Editor\src\PropertyEditor.h">
       <Filter>Header Files\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\src\EMesh.h">
+      <Filter>Header Files\Runtime</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

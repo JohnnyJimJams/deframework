@@ -23,9 +23,12 @@ void PropertyEditor::TickUI(bool* p_open)
 
 	if (m_entity)
 	{
+		ImGui::InputText("Name", (char *)m_entity->Name.c_str(), m_entity->Name.capacity() + 1);
+		//m_entity->Name = name;
+		ImGui::Checkbox("Active", &m_entity->Active);
 		ImGui::SliderFloat3("Position", (float*)&m_entity->Position, -10.0f, 10.0f);
 		glm::vec3 euler = degrees(m_entity->GetEulerAngles());
-		ImGui::SliderFloat3("Rotation", (float *)&euler, -180.0f, 180.0f);
+		ImGui::SliderFloat3("Rotation", (float *)&euler, -179.999f, 179.999f);
 		m_entity->SetEulerAngles(radians(euler));
 		ImGui::SliderFloat3("Scale", (float*)&m_entity->Scale, -10.0f, 10.0f);
 	}

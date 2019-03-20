@@ -6,14 +6,21 @@
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
+Mesh::Mesh()
+{
+	hasMesh = false;
+}
+
 Mesh::Mesh(const char * filename)
 {
+	hasMesh = false;
 	std::string err, warn;
 	tinygltf::TinyGLTF loader;
 	bool ret = loader.LoadBinaryFromFile(&m_model, &err, &warn, filename);
 	if (ret)
 	{
 		BindModel();
+		hasMesh = true;
 	}
 	else
 	{
@@ -23,6 +30,23 @@ Mesh::Mesh(const char * filename)
 
 Mesh::~Mesh()
 {
+}
+
+void Mesh::Load(const char * filename)
+{
+	hasMesh = false;
+	std::string err, warn;
+	tinygltf::TinyGLTF loader;
+	bool ret = loader.LoadBinaryFromFile(&m_model, &err, &warn, filename);
+	if (ret)
+	{
+		BindModel();
+		hasMesh = true;
+	}
+	else
+	{
+		m_VAO = 0;
+	}
 }
 
 void Mesh::BindModel()
@@ -116,12 +140,15 @@ void Mesh::DrawModelNodes(tinygltf::Node &node) {
 	}
 }
 void Mesh::Draw() {
-	glBindVertexArray(m_VAO);
+	if (hasMesh)
+	{
+		glBindVertexArray(m_VAO);
 
-	const tinygltf::Scene &scene = m_model.scenes[m_model.defaultScene];
-	for (size_t i = 0; i < scene.nodes.size(); ++i) {
-		DrawModelNodes(m_model.nodes[scene.nodes[i]]);
+		const tinygltf::Scene &scene = m_model.scenes[m_model.defaultScene];
+		for (size_t i = 0; i < scene.nodes.size(); ++i) {
+			DrawModelNodes(m_model.nodes[scene.nodes[i]]);
+		}
+
+		glBindVertexArray(0);
 	}
-
-	glBindVertexArray(0);
 }

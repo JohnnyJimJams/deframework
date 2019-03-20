@@ -3,7 +3,7 @@
 #include "ShaderProgram.h"
 #include "Texture2D.h"
 #include "Layer.h"
-#include "Mesh.h"
+#include "EMesh.h"
 #include "Camera.h"
 
 class Editor;
@@ -27,7 +27,7 @@ private:
 	unsigned int uniDefaultProjectionView;
 	Layer *m_layer;
 	Texture2D *m_texture;
-	Mesh *m_mesh;
 	Camera *m_camera;
-	Entity *m_entity;
+
+	EMesh *m_emesh;
 };

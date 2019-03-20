@@ -2,12 +2,17 @@
 #include <glm/gtc/quaternion.hpp>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
+#include <string>
 
 Entity::Entity()
 {
 	Position = glm::vec3();
 	Rotation = glm::quat();
 	Scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	static int entityID = 1;
+	Name = "Entity" + std::to_string(entityID++);
+	Active = true;
+	ScreenSpace = false;
 }
 
 Entity::~Entity()
