@@ -97,6 +97,18 @@ int Demo::GetLayerIndex(string name)
 	return index;
 }
 
+void Demo::AddMeshes(std::map<std::string, Mesh*> meshesToAdd)
+{
+}
+
+void Demo::AddMesh(std::string name)
+{
+}
+
+void Demo::RemoveMeshes(std::vector<std::string> meshesToRemove)
+{
+}
+
 bool Demo::LayerNameExists(string name)
 {
 	for (auto l : m_layers)

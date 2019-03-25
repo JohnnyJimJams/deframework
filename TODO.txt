@@ -1,3 +1,68 @@
+NOTES
+=====
+* All Initialization to happen at the start of the demo, this means scrubbing will work without issues.
+
+TODO!
+=====
+ - Material File format (.mat) Shader (filename), Textur2D (filename)
+ - Assets (Meshes, Textures, Materials, Shaders)
+   - Demo needs to load, use and reference.
+ - Create EImage
+ - Create ELight
+
+ - Keyframe Vec3
+ - Keyframe Quat
+
+ - Entity Selection
+ - Create Entity
+ - Delete Entity
+ - Drag and drop parenting
+
+ - Show keyframes for selected
+ - Add keyframe for selected
+ - Deleted keyframe for selected
+
+ - Load
+ - Save
+
+ - Properties for selected Layer
+ - Properties for selected Keyframe
+ - Properties for Material
+
+ - Properties for Materials
+
+ - Shadows
+
+ - PBR Shader
+
+Bugs!
+=====
+Reducing size of curve editor and timeline window crashes application
+Windows 10 display scaling isn't taking into account, the whole editor is too small if display scaling is set bigger than 100% under windows 10
+
+Viewport (Editor)
+
+Mesh Animation
+
+AssetManager
+ - Load
+ - Save
+ - Package
+
+Demo Class
+ - Name
+ - Music
+ - List of Layers
+ - List of Animations
+ - AssetManager
+
+EditorDemo (For undo, redo, detecting if changes have occured) - Any action that changes the Demo instance is recorded here.
+
+Sprint 2
+========
+Zoom timeline Window
+Scroll timeline Window
+
 Done!
 =====
 GLFW
@@ -42,86 +107,8 @@ glTF
  - Layer Selection
  - Create Layer
  - Delete Layer
-
  - Order Layer
-NOTES
-=====
-* All Initialization happens at the start of the demo, this means scrubbing will work without issues.
-* Eigen as the maths lib
-
-TODO!
-=====
- - Entities 
- - Entity Selection
- - Create Entity
- - Delete Entity
- - Drag and drop parenting
-
  - Properties
- - Show keyframes for selected
- - Add keyframe for selected
- - Deleted keyframe for selected
-
- - Load
- - Save
- 
-Bugs!
-=====
-Reducing size of curve editor window crashes application
-Windows 10 display scaling isn't taking into account, the whole editor is too small if display scaling is set bigger than 100% under windows 10
-
-Runtime Sprint
-==============
-Swap Eigen for GLM, Keyframe, Camera, Demoview
-
-Rendering Template
- - Component - Mesh, Material
-
- - Entity (Name, Transform, Active, Visible, List of Components)
-
-Layers / FrameBuffers
- - Opacity
- - Enabled
- - List of Entities
- - BlendMode
-
-Viewport (Editor)
-
-Assets
- - Materials
-
-Mesh Animation
-
-Transform
-
-Entities
-
-AssetManager
- - Load
- - Save
- - Package
-
-Demo Class
- - Name
- - Music
- - List of Layers
- - List of Animations
- - AssetManager
-
-EditorDemo (For undo, redo, detecting if changes have occured) - Any action that changes the Demo instance is recorded here.
-
-Editor Windows
-==============
-Layers / Hierarchy
-Demo Properties
-Assets
-Viewport (Selection and Editor Camera)
-DemoView/Output
-Properties
-Dopesheet
-Curve Editor
-
-Sprint 2
-========
-Zoom timeline Window
-Scroll timeline Window
+ - Entities - Name, Type, Transform, Active, Children, Parent
+ - Entity Abstract Base Class
+ - Create EMesh

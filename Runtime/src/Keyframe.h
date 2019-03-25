@@ -1,7 +1,7 @@
 #pragma once
 #include "glm/vec2.hpp"
 
-enum KeyframeHandleType
+enum class KeyframeHandleType
 {
 	AUTO
 };
@@ -14,12 +14,12 @@ struct KeyframeHandle
 	glm::vec2 position;
 };
 
-enum PropertyType
+enum class KeyframePropertyType
 {
 	BOOL_VAL, DOUBLE_VAL, FLOAT_VAL, INT_VAL
 };
 
-enum KeyframeInterpolationType
+enum class KeyframeInterpolationType
 {
 	CONSTANT, LINEAR, CURVED
 };
@@ -33,7 +33,7 @@ struct Keyframe
 
 	double time;
 
-	PropertyType type;
+	KeyframePropertyType type;
 
 	union PropertyValue {
 		bool boolValue;

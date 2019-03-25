@@ -8,7 +8,7 @@ DopeSheet::DopeSheet(Editor *peditor)
 	editor = peditor;
 
 	// Test bool keyframes
-	animations.push_back(Animation((void *)&keymebool, PropertyType::BOOL_VAL));
+	animations.push_back(Animation((void *)&keymebool, KeyframePropertyType::BOOL_VAL));
 	animations[0].InsertKeyframe(Keyframe(0, false, KeyframeInterpolationType::CONSTANT));
 	animations[0].InsertKeyframe(Keyframe(1, true, KeyframeInterpolationType::CONSTANT));
 	animations[0].InsertKeyframe(Keyframe(2, false, KeyframeInterpolationType::CONSTANT));
@@ -24,7 +24,7 @@ DopeSheet::DopeSheet(Editor *peditor)
 	//}
 
 	// Test int keyframes
-	animations.push_back(Animation((void *)&keymeint, PropertyType::INT_VAL));
+	animations.push_back(Animation((void *)&keymeint, KeyframePropertyType::INT_VAL));
 	animations[1].InsertKeyframe(Keyframe(0, 3, KeyframeInterpolationType::CURVED));
 	animations[1].InsertKeyframe(Keyframe(1, 1, KeyframeInterpolationType::CURVED));
 	animations[1].InsertKeyframe(Keyframe(2, 4, KeyframeInterpolationType::CURVED));
@@ -40,7 +40,7 @@ DopeSheet::DopeSheet(Editor *peditor)
 	//}
 
 	// Test float keyframes
-	animations.push_back(Animation((void *)&keymefloat, PropertyType::FLOAT_VAL));
+	animations.push_back(Animation((void *)&keymefloat, KeyframePropertyType::FLOAT_VAL));
 	animations[2].InsertKeyframe(Keyframe(0.0, -10.0f, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
 	animations[2].InsertKeyframe(Keyframe(10.0, 10.0f, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
 
@@ -53,7 +53,7 @@ DopeSheet::DopeSheet(Editor *peditor)
 	//}
 
 	// Test double keyframes
-	animations.push_back(Animation((void *)&keymedouble, PropertyType::DOUBLE_VAL));
+	animations.push_back(Animation((void *)&keymedouble, KeyframePropertyType::DOUBLE_VAL));
 	animations[3].InsertKeyframe(Keyframe(0.0, 0.3, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
 	animations[3].InsertKeyframe(Keyframe(15.0, -150.2, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
 	animations[3].InsertKeyframe(Keyframe(30.0, 150.0, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));

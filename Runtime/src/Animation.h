@@ -6,7 +6,7 @@ class Animation
 {
 public:
 	Animation();
-	Animation(void *p_property, PropertyType p_type);
+	Animation(void *p_property, KeyframePropertyType p_type);
 	bool EvaluateBool(double time, bool updateProperty = true);
 	int EvaluateInt(double time, bool updateProperty = true);
 	float EvaluateFloat(double time, bool updateProperty = true);
@@ -14,9 +14,9 @@ public:
 	int InsertKeyframe(Keyframe k);										// keep this vector of Keyframes sorted by time
 	void DeleteKeyframe(int index);
 	std::vector<Keyframe> GetKeyframes();
-	PropertyType GetType();
+	KeyframePropertyType GetType();
 private:
 	std::vector<Keyframe> keyframes;
 	void *property;
-	PropertyType type;
+	KeyframePropertyType type;
 };

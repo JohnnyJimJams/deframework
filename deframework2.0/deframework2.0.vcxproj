@@ -136,6 +136,7 @@
     <ClCompile Include="..\Editor\dep\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="..\Editor\dep\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="..\Editor\dep\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="..\Editor\src\Assets.cpp" />
     <ClCompile Include="..\Editor\src\Console.cpp" />
     <ClCompile Include="..\Editor\src\CurveEditor.cpp" />
     <ClCompile Include="..\Editor\src\DemoView.cpp" />
@@ -149,17 +150,20 @@
     <ClCompile Include="..\Runtime\src\Animation.cpp" />
     <ClCompile Include="..\Runtime\src\Camera.cpp" />
     <ClCompile Include="..\Runtime\src\Demo.cpp" />
+    <ClCompile Include="..\Runtime\src\EImage.cpp" />
     <ClCompile Include="..\Runtime\src\EMesh.cpp" />
     <ClCompile Include="..\Runtime\src\Entity.cpp" />
     <ClCompile Include="..\Runtime\src\FrameBuffer.cpp" />
     <ClCompile Include="..\Runtime\src\Keyframe.cpp" />
     <ClCompile Include="..\Runtime\src\Layer.cpp" />
+    <ClCompile Include="..\Runtime\src\Material.cpp" />
     <ClCompile Include="..\Runtime\src\Mesh.cpp" />
     <ClCompile Include="..\Runtime\src\MP3.cpp" />
     <ClCompile Include="..\Runtime\src\ShaderProgram.cpp" />
     <ClCompile Include="..\Runtime\src\Texture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Editor\src\Assets.h" />
     <ClInclude Include="..\Editor\src\Console.h" />
     <ClInclude Include="..\Editor\src\CurveEditor.h" />
     <ClInclude Include="..\Editor\src\DemoView.h" />
@@ -174,11 +178,13 @@
     <ClInclude Include="..\Runtime\src\Animation.h" />
     <ClInclude Include="..\Runtime\src\Camera.h" />
     <ClInclude Include="..\Runtime\src\Demo.h" />
+    <ClInclude Include="..\Runtime\src\EImage.h" />
     <ClInclude Include="..\Runtime\src\EMesh.h" />
     <ClInclude Include="..\Runtime\src\Entity.h" />
     <ClInclude Include="..\Runtime\src\FrameBuffer.h" />
     <ClInclude Include="..\Runtime\src\Keyframe.h" />
     <ClInclude Include="..\Runtime\src\Layer.h" />
+    <ClInclude Include="..\Runtime\src\Material.h" />
     <ClInclude Include="..\Runtime\src\Mesh.h" />
     <ClInclude Include="..\Runtime\src\MP3.h" />
     <ClInclude Include="..\Runtime\src\ShaderProgram.h" />

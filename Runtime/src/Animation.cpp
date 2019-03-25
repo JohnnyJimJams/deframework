@@ -4,7 +4,7 @@ Animation::Animation()
 {
 }
 
-Animation::Animation(void *p_property, PropertyType p_type)
+Animation::Animation(void *p_property, KeyframePropertyType p_type)
 {
 	property = p_property;
 	type = p_type;
@@ -282,7 +282,7 @@ std::vector<Keyframe> Animation::GetKeyframes()
 	return keyframes;
 }
 
-PropertyType Animation::GetType()
+KeyframePropertyType Animation::GetType()
 {
 	return type;
 }

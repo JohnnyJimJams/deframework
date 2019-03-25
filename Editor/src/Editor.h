@@ -11,6 +11,7 @@
 #include "CurveEditor.h"
 #include "DemoView.h"
 #include "PropertyEditor.h"
+#include "Assets.h"
 #include "Demo.h"
 #include <GL/gl3w.h>    // Initialize with gl3wInit()
 #include <GLFW/glfw3.h>
@@ -45,6 +46,7 @@ private:
 	DopeSheet *m_dopesheet;
 	CurveEditor *m_curveeditor;
 	PropertyEditor *m_propertyeditor;
+	Assets *m_assets;
 
 	DemoView *m_demoview;
 	Demo *m_demo;
