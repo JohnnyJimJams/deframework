@@ -13,6 +13,14 @@ Demo::Demo(unsigned int width, unsigned int height)
 
 Demo::~Demo()
 {
+	for (auto m : m_materials)
+		RemoveMaterial(m.first);
+	for (auto m : m_meshes)
+		RemoveMesh(m.first);
+	for (auto t : m_textures)
+		RemoveTexture2D(t.first);
+	for (auto s : m_shaders)
+		RemoveShader(s.first);
 }
 
 unsigned int Demo::GetWidth()
@@ -80,6 +88,7 @@ void Demo::DeleteLayers(std::vector<Layer*>* layersToDelete)
 		{
 			m_layers.erase(m_layers.begin() + index);
 		}
+		delete(layerToDelete);
 	}
 }
 
@@ -97,16 +106,144 @@ int Demo::GetLayerIndex(string name)
 	return index;
 }
 
-void Demo::AddMeshes(std::map<std::string, Mesh*> meshesToAdd)
+void Demo::AddMesh(Mesh *meshToAdd)
 {
 }
 
-void Demo::AddMesh(std::string name)
+std::string Demo::AddMesh()
+{
+	// create a unique mesh name
+	int meshNum = 1;
+	string name = "mesh" + to_string(meshNum);
+
+	bool nameExists;
+	do
+	{
+		if (nameExists = MeshNameExists(name))
+		{
+			meshNum++;
+			name = "mesh" + to_string(meshNum);
+		}
+	} while (nameExists);
+
+	// Create new mesh
+	Mesh *newMesh = new Mesh();
+
+	m_meshes[name] = newMesh;
+
+	return name;
+}
+
+void Demo::RemoveMesh(std::string meshToRemove)
+{
+	if (MeshNameExists(meshToRemove))
+	{
+		Mesh *meshToDelete = m_meshes[meshToRemove];
+		m_meshes.erase(meshToRemove);
+		delete(meshToDelete);
+	}
+}
+
+bool Demo::MeshNameExists(std::string name)
+{
+	return (!(m_meshes.find(name) == m_meshes.end()));
+}
+
+std::string Demo::AddMaterial()
+{
+	// create a unique mat name
+	int matNum = 1;
+	string name = "material" + to_string(matNum);
+
+	bool nameExists;
+	do
+	{
+		if (nameExists = MaterialNameExists(name))
+		{
+			matNum++;
+			name = "material" + to_string(matNum);
+		}
+	} while (nameExists);
+
+	// Create new mat
+	Material *newMaterial= new Material();
+
+	m_materials[name] = newMaterial;
+
+	return name;
+}
+
+void Demo::RemoveMaterial(std::string materialToRemove)
+{
+	if (MaterialNameExists(materialToRemove))
+	{
+		Material *matToDelete = m_materials[materialToRemove];
+		m_materials.erase(materialToRemove);
+		delete(matToDelete);
+	}
+}
+
+bool Demo::MaterialNameExists(std::string name)
+{
+	return (!(m_materials.find(name) == m_materials.end()));
+}
+
+std::string Demo::AddTexture2D()
+{
+	// create a unique tex name
+	int texNum = 1;
+	string name = "texture" + to_string(texNum);
+
+	bool nameExists;
+	do
+	{
+		if (nameExists = Texture2DNameExists(name))
+		{
+			texNum++;
+			name = "texture" + to_string(texNum);
+		}
+	} while (nameExists);
+
+	// Create new tex
+	Texture2D *newTexture = new Texture2D(1024, 1024, 4);
+
+	m_textures[name] = newTexture;
+
+	return name;
+}
+
+bool Demo::Texture2DNameExists(std::string name)
+{
+	return (!(m_textures.find(name) == m_textures.end()));
+}
+
+void Demo::AddShader(ShaderProgram * shaderToAdd)
 {
 }
 
-void Demo::RemoveMeshes(std::vector<std::string> meshesToRemove)
+void Demo::RemoveShader(std::string shaderToRemove)
 {
+	if (ShaderNameExists(shaderToRemove))
+	{
+		ShaderProgram *shaderToDelete = m_shaders[shaderToRemove];
+		m_shaders.erase(shaderToRemove);
+		delete(shaderToDelete);
+	}
+}
+
+bool Demo::ShaderNameExists(std::string name)
+{
+	return (!(m_shaders.find(name) == m_shaders.end()));
+}
+
+void Demo::RemoveTexture2D(std::string texToRemove)
+{
+	if (Texture2DNameExists(texToRemove))
+	{
+		Texture2D *textureToDelete = m_textures[texToRemove];
+		m_textures.erase(texToRemove);
+		delete(textureToDelete);
+	}
 }
 
 bool Demo::LayerNameExists(string name)

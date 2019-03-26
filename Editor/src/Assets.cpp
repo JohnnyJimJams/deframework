@@ -5,7 +5,7 @@
 
 static OPENFILENAME ofn;
 
-static char szFile[100];
+static char szFile[1024];
 
 Assets::Assets(Editor *peditor)
 {
@@ -25,8 +25,30 @@ void Assets::TickUI(bool* p_open)
 	}
 
 	// Assets buttons
-	if (ImGui::Button("Add Asset"))
+	if (ImGui::Button("Create.."))
 	{
+		ImGui::OpenPopup("asset_create_popup");
+	}
+	ImGui::SameLine();
+	if (ImGui::BeginPopup("asset_create_popup"))
+	{
+		if (ImGui::MenuItem("Material"))
+		{
+			std::string newMat = editor->GetDemo()->AddMaterial();
+		}
+		if (ImGui::MenuItem("Texture2D"))
+		{
+			std::string newTex = editor->GetDemo()->AddTexture2D();
+		}
+		if (ImGui::MenuItem("Mesh"))
+		{
+			std::string newMesh = editor->GetDemo()->AddMesh();
+		}
+		ImGui::EndPopup();
+	}
+	if (ImGui::Button("Load Asset/s"))
+	{
+		ZeroMemory(szFile, 1024);
 		ZeroMemory(&ofn, sizeof(ofn));
 		ofn.lStructSize = sizeof(ofn);
 		ofn.hwndOwner = NULL;
@@ -40,17 +62,37 @@ void Assets::TickUI(bool* p_open)
 		ofn.lpstrInitialDir = NULL;
 		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_EXPLORER | OFN_ALLOWMULTISELECT;
 		GetOpenFileName(&ofn);
-
-		// Now simpley display the file name 
-		MessageBox(NULL, ofn.lpstrFile, "File Name", MB_OK);
+		// Get results ()
+		if (ofn.lpstrFile[0] != '\0')
+		{
+			std::string first = ofn.lpstrFile;
+			char c = ofn.lpstrFile[first.size() + 1];
+			if (c == '\0')
+			{
+				// single file selected
+				LoadAsset(first);
+			} 
+			else
+			{
+				// multiple files selected
+				std::string path = first;
+				int currentPos = path.size() + 1;
+				do
+				{
+					std::string current = &ofn.lpstrFile[currentPos];
+					LoadAsset(path + "\\" + current);
+					currentPos += current.size() + 1;
+				} while (ofn.lpstrFile[currentPos] != '\0');
+			}
+		}
 	}
 	ImGui::SameLine();
 	if (ImGui::Button("Remove Asset/s"))
 	{
-		if (!m_selectedMeshes.empty() && !m_selectedTextures.empty() && !m_selectedShaders.empty() && !m_selectedMaterials.empty())
+		if (!m_selectedMeshes.empty() || !m_selectedTextures.empty() || !m_selectedShaders.empty() || !m_selectedMaterials.empty())
 		{ 
 			// modal are you sure?
-			ImGui::OpenPopup("Remove Assets from demo? This doesn't delete any files on disk.");
+			ImGui::OpenPopup("Remove Assets?");
 		}
 	}
 
@@ -62,8 +104,27 @@ void Assets::TickUI(bool* p_open)
 		if (ImGui::Button("Remove", ImVec2(120, 0))) { 
 			if (!m_selectedMeshes.empty()) 
 			{
-				editor->GetDemo()->RemoveMeshes(m_selectedMeshes);
+				for (auto m : m_selectedMeshes)
+					editor->GetDemo()->RemoveMesh(m);
 				m_selectedMeshes.clear();
+			}
+			if (!m_selectedTextures.empty())
+			{
+				for (auto t : m_selectedTextures)
+					editor->GetDemo()->RemoveTexture2D(t);
+				m_selectedTextures.clear();
+			}
+			if (!m_selectedMaterials.empty())
+			{
+				for (auto m : m_selectedMaterials)
+					editor->GetDemo()->RemoveMaterial(m);
+				m_selectedMaterials.clear();
+			}
+			if (!m_selectedShaders.empty())
+			{
+				for (auto s : m_selectedShaders)
+					editor->GetDemo()->RemoveShader(s);
+				m_selectedShaders.clear();
 			}
 			ImGui::CloseCurrentPopup(); 
 		}
@@ -73,41 +134,83 @@ void Assets::TickUI(bool* p_open)
 		ImGui::EndPopup();
 	}
 
-	//// List of layers as trees
-	//auto layers = editor->GetDemo()->GetLayers();
-	//int node_clicked = -1;
-	//int i = 0;
-	//for (auto layer : layers)
-	//{
-	//	ImGuiTreeNodeFlags node_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
-	//	if (std::find(m_selectedLayers.begin(), m_selectedLayers.end(), layer) != m_selectedLayers.end())
-	//	{
-	//		node_flags = node_flags | ImGuiTreeNodeFlags_Selected;
-	//	}
-	//	
-	//	bool node_open = ImGui::TreeNodeEx((void*)(intptr_t)i, node_flags, layer->name.c_str(), i);
-	//	if (node_open)
-	//	{
-	//		ImGui::Text(layer->name.c_str());
-	//		ImGui::TreePop();
-	//	}
+	std::string nodeClicked = "";
+	std::string category = "";
+	if (ImGui::CollapsingHeader("Materials"))
+	{
+		auto materials = editor->GetDemo()->GetMaterials();
+		for (auto m : materials)
+		{
+			bool selected = std::find(m_selectedMaterials.begin(), m_selectedMaterials.end(), m.first) != m_selectedMaterials.end();
+			if (ImGui::Selectable(m.first.c_str(), selected))
+			{
+				nodeClicked = m.first;
+				category = "Materials";
+			}
+		}
+	}
 
-	//	if (ImGui::IsItemClicked())
-	//		node_clicked = i;
+	if (ImGui::CollapsingHeader("Meshes"))
+	{
+		auto meshes = editor->GetDemo()->GetMeshes();
+		for (auto m : meshes)
+		{
+			bool selected = std::find(m_selectedMeshes.begin(), m_selectedMeshes.end(), m.first) != m_selectedMeshes.end();
+			if (ImGui::Selectable(m.first.c_str(), selected))
+			{
+				nodeClicked = m.first;
+				category = "Meshes";
+			}
+		}
+	}
 
-	//	i++;
-	//}
-	//if (node_clicked != -1)
-	//{
-	//	// Update selection state. Process outside of tree loop to avoid visual inconsistencies during the clicking-frame.
-	//	if (ImGui::GetIO().KeyCtrl)
-	//		m_selectedLayers.push_back(layers[node_clicked]);
-	//	else
-	//	{
-	//		m_selectedLayers.clear();
-	//		m_selectedLayers.push_back(layers[node_clicked]);
-	//	}
-	//}
+	if (ImGui::CollapsingHeader("Textures"))
+	{
+		auto textures = editor->GetDemo()->GetTextures();
+		for (auto t : textures)
+		{
+			bool selected = std::find(m_selectedTextures.begin(), m_selectedTextures.end(), t.first) != m_selectedTextures.end();
+			if (ImGui::Selectable(t.first.c_str(), selected))
+			{
+				nodeClicked = t.first;
+				category = "Textures";
+			}
+		}
+	}
+
+	if (ImGui::CollapsingHeader("Shaders"))
+	{
+		auto shaders = editor->GetDemo()->GetShaders();
+		for (auto s : shaders)
+		{
+			bool selected = std::find(m_selectedShaders.begin(), m_selectedShaders.end(), s.first) != m_selectedShaders.end();
+			if (ImGui::Selectable(s.first.c_str(), selected))
+			{
+				nodeClicked = s.first;
+				category = "Shaders";
+			}
+		}
+	}
+	if (nodeClicked != "")
+	{
+		if (!ImGui::GetIO().KeyCtrl)
+		{
+			m_selectedMaterials.clear();
+			m_selectedMeshes.clear();
+			m_selectedShaders.clear();
+			m_selectedTextures.clear();
+		}
+		if (category == "Materials") m_selectedMaterials.push_back(nodeClicked);
+		if (category == "Meshes") m_selectedMeshes.push_back(nodeClicked);
+		if (category == "Textures") m_selectedTextures.push_back(nodeClicked);
+		if (category == "Shaders") m_selectedShaders.push_back(nodeClicked);
+	}
 
 	ImGui::End();
+}
+
+void Assets::LoadAsset(std::string file)
+{
+	editor->GetConsole()->Log(file.c_str());
+	editor->GetConsole()->Log("\n");
 }

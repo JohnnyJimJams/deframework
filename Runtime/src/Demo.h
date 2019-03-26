@@ -2,11 +2,13 @@
 #define __DEMO_H_
 
 #include <GL/gl3w.h> 
-#include "Texture2D.h"
 #include "Layer.h"
+
+#include "Texture2D.h"
 #include "Material.h"
 #include "ShaderProgram.h"
 #include "Mesh.h"
+
 #include <vector>
 #include <map>
 #include <string>
@@ -28,9 +30,27 @@ public:
 	bool LayerNameExists(std::string name);
 	int GetLayerIndex(std::string name);
 
-	void AddMeshes(std::map<std::string, Mesh *> meshesToAdd);
-	void AddMesh(std::string name);
-	void RemoveMeshes(std::vector<std::string>  meshesToRemove);
+	void AddMesh(Mesh *meshToAdd);
+	std::string AddMesh();
+	void RemoveMesh(std::string meshToRemove);
+	bool MeshNameExists(std::string name);
+	std::map<std::string, Mesh *> &GetMeshes() { return m_meshes; }
+
+	std::string AddMaterial();
+	void RemoveMaterial(std::string materialToRemove);
+	bool MaterialNameExists(std::string name);
+	std::map<std::string, Material *> &GetMaterials() { return m_materials; }
+
+	std::string AddTexture2D();
+	void RemoveTexture2D(std::string texToRemove);
+	bool Texture2DNameExists(std::string name);
+	std::map<std::string, Texture2D *> &GetTextures() { return m_textures; }
+
+	void AddShader(ShaderProgram *shaderToAdd);
+	void RemoveShader(std::string shaderToRemove);
+	bool ShaderNameExists(std::string name);
+	std::map<std::string, ShaderProgram *> &GetShaders() { return m_shaders; }
+
 private:
 	unsigned int m_width;
 	unsigned int m_height;
