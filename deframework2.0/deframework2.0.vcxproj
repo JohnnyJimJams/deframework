@@ -136,6 +136,7 @@
     <ClCompile Include="..\Editor\dep\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="..\Editor\dep\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="..\Editor\dep\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="..\Editor\dep\imgui\misc\cpp\imgui_stdlib.cpp" />
     <ClCompile Include="..\Editor\src\Assets.cpp" />
     <ClCompile Include="..\Editor\src\Console.cpp" />
     <ClCompile Include="..\Editor\src\CurveEditor.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="..\Runtime\src\Texture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Editor\dep\imgui\misc\cpp\imgui_stdlib.h" />
     <ClInclude Include="..\Editor\src\Assets.h" />
     <ClInclude Include="..\Editor\src\Console.h" />
     <ClInclude Include="..\Editor\src\CurveEditor.h" />

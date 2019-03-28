@@ -37,7 +37,7 @@ DemoView::DemoView(Editor *peditor)
 	//auto mesh = static_cast<EMesh *>(m_entity);
 	m_emesh->GetMesh()->Load("..\\Editor\\resources\\suzanne.glb");
 	editor->GetConsole()->Log(m_emesh->GetMesh()->GetLog().c_str());
-	editor->GetPropertyEditor()->SetEntity(m_emesh);
+	editor->GetPropertyEditor()->AddEntity(m_emesh);
 }
 
 DemoView::~DemoView()

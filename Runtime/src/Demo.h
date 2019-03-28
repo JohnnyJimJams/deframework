@@ -30,26 +30,34 @@ public:
 	bool LayerNameExists(std::string name);
 	int GetLayerIndex(std::string name);
 
-	void AddMesh(Mesh *meshToAdd);
+	std::string AddMesh(Mesh *meshToAdd);
+	void AddMesh(std::string name, Mesh *meshToAdd);
 	std::string AddMesh();
 	void RemoveMesh(std::string meshToRemove);
 	bool MeshNameExists(std::string name);
 	std::map<std::string, Mesh *> &GetMeshes() { return m_meshes; }
-
+	std::string GetMeshName(Mesh *mesh);
+	
 	std::string AddMaterial();
+	void AddMaterial(std::string name, Material *material);
 	void RemoveMaterial(std::string materialToRemove);
 	bool MaterialNameExists(std::string name);
 	std::map<std::string, Material *> &GetMaterials() { return m_materials; }
+	std::string GetMaterialName(Material *material);
 
 	std::string AddTexture2D();
+	void AddTexture2D(std::string name, Texture2D *texture);
 	void RemoveTexture2D(std::string texToRemove);
 	bool Texture2DNameExists(std::string name);
 	std::map<std::string, Texture2D *> &GetTextures() { return m_textures; }
+	std::string GetTexture2DName(Texture2D *texture);
 
 	void AddShader(ShaderProgram *shaderToAdd);
+	void AddShader(std::string name, ShaderProgram *shaderToAdd);
 	void RemoveShader(std::string shaderToRemove);
 	bool ShaderNameExists(std::string name);
 	std::map<std::string, ShaderProgram *> &GetShaders() { return m_shaders; }
+	std::string GetShaderName(ShaderProgram *shader);
 
 private:
 	unsigned int m_width;

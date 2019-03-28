@@ -14,13 +14,13 @@ Demo::Demo(unsigned int width, unsigned int height)
 Demo::~Demo()
 {
 	for (auto m : m_materials)
-		RemoveMaterial(m.first);
+		delete(m.second);
 	for (auto m : m_meshes)
-		RemoveMesh(m.first);
+		delete(m.second);
 	for (auto t : m_textures)
-		RemoveTexture2D(t.first);
+		delete(t.second);
 	for (auto s : m_shaders)
-		RemoveShader(s.first);
+		delete(s.second);
 }
 
 unsigned int Demo::GetWidth()
@@ -106,8 +106,14 @@ int Demo::GetLayerIndex(string name)
 	return index;
 }
 
-void Demo::AddMesh(Mesh *meshToAdd)
+string Demo::AddMesh(Mesh *meshToAdd)
 {
+	return string();
+}
+
+void Demo::AddMesh(std::string name, Mesh * meshToAdd)
+{
+	m_meshes[name] = meshToAdd;
 }
 
 std::string Demo::AddMesh()
@@ -149,6 +155,13 @@ bool Demo::MeshNameExists(std::string name)
 	return (!(m_meshes.find(name) == m_meshes.end()));
 }
 
+std::string Demo::GetMeshName(Mesh * mesh)
+{
+	for (auto m : m_meshes)
+		if (m.second == mesh) return m.first;
+	return std::string();
+}
+
 std::string Demo::AddMaterial()
 {
 	// create a unique mat name
@@ -173,6 +186,11 @@ std::string Demo::AddMaterial()
 	return name;
 }
 
+void Demo::AddMaterial(std::string name, Material * material)
+{
+	m_materials[name] = material;
+}
+
 void Demo::RemoveMaterial(std::string materialToRemove)
 {
 	if (MaterialNameExists(materialToRemove))
@@ -186,6 +204,13 @@ void Demo::RemoveMaterial(std::string materialToRemove)
 bool Demo::MaterialNameExists(std::string name)
 {
 	return (!(m_materials.find(name) == m_materials.end()));
+}
+
+std::string Demo::GetMaterialName(Material * material)
+{
+	for (auto m : m_materials)
+		if (m.second == material) return m.first;
+	return std::string();
 }
 
 std::string Demo::AddTexture2D()
@@ -212,13 +237,30 @@ std::string Demo::AddTexture2D()
 	return name;
 }
 
+void Demo::AddTexture2D(std::string name, Texture2D * texture)
+{
+	m_textures[name] = texture;
+}
+
 bool Demo::Texture2DNameExists(std::string name)
 {
 	return (!(m_textures.find(name) == m_textures.end()));
 }
 
+std::string Demo::GetTexture2DName(Texture2D * texture)
+{
+	for (auto t : m_textures)
+		if (t.second == texture) return t.first;
+	return std::string();
+}
+
 void Demo::AddShader(ShaderProgram * shaderToAdd)
 {
+}
+
+void Demo::AddShader(std::string name, ShaderProgram * shaderToAdd)
+{
+	m_shaders[name] = shaderToAdd;
 }
 
 void Demo::RemoveShader(std::string shaderToRemove)
@@ -234,6 +276,13 @@ void Demo::RemoveShader(std::string shaderToRemove)
 bool Demo::ShaderNameExists(std::string name)
 {
 	return (!(m_shaders.find(name) == m_shaders.end()));
+}
+
+std::string Demo::GetShaderName(ShaderProgram * shader)
+{
+	for (auto s : m_shaders)
+		if (s.second == shader) return s.first;
+	return std::string();
 }
 
 void Demo::RemoveTexture2D(std::string texToRemove)

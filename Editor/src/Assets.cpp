@@ -126,6 +126,7 @@ void Assets::TickUI(bool* p_open)
 					editor->GetDemo()->RemoveShader(s);
 				m_selectedShaders.clear();
 			}
+			editor->GetPropertyEditor()->ClearAll();
 			ImGui::CloseCurrentPopup(); 
 		}
 		ImGui::SetItemDefaultFocus();
@@ -199,11 +200,28 @@ void Assets::TickUI(bool* p_open)
 			m_selectedMeshes.clear();
 			m_selectedShaders.clear();
 			m_selectedTextures.clear();
+			editor->GetPropertyEditor()->ClearAll();
 		}
-		if (category == "Materials") m_selectedMaterials.push_back(nodeClicked);
-		if (category == "Meshes") m_selectedMeshes.push_back(nodeClicked);
-		if (category == "Textures") m_selectedTextures.push_back(nodeClicked);
-		if (category == "Shaders") m_selectedShaders.push_back(nodeClicked);
+		if (category == "Materials")
+		{
+			m_selectedMaterials.push_back(nodeClicked);
+			editor->GetPropertyEditor()->AddMaterial(editor->GetDemo()->GetMaterials()[nodeClicked]);
+		}
+		if (category == "Meshes")
+		{
+			m_selectedMeshes.push_back(nodeClicked);
+			editor->GetPropertyEditor()->AddMesh(editor->GetDemo()->GetMeshes()[nodeClicked]);
+		}
+		if (category == "Textures")
+		{
+			m_selectedTextures.push_back(nodeClicked);
+			editor->GetPropertyEditor()->AddTexture2D(editor->GetDemo()->GetTextures()[nodeClicked]);
+		}
+		if (category == "Shaders")
+		{
+			m_selectedShaders.push_back(nodeClicked);
+			editor->GetPropertyEditor()->AddShaderProgram(editor->GetDemo()->GetShaders()[nodeClicked]);
+		}
 	}
 
 	ImGui::End();

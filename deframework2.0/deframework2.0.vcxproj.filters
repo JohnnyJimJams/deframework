@@ -126,6 +126,9 @@
     <ClCompile Include="..\Editor\src\Assets.cpp">
       <Filter>Source Files\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="..\Editor\dep\imgui\misc\cpp\imgui_stdlib.cpp">
+      <Filter>Source Files\3rd Party</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Editor\src\Console.h">
@@ -205,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="..\Editor\src\Assets.h">
       <Filter>Header Files\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Editor\dep\imgui\misc\cpp\imgui_stdlib.h">
+      <Filter>Source Files\3rd Party</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
