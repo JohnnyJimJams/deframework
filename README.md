@@ -21,4 +21,6 @@ The code is split into two main concepts
 2) Editor (Imgui and editor code)
    Major Class: Editor
 
+This document could really use some love, but see the TODO.txt for a brain dump of what's left to do, what's been done and bugs.
+https://raw.githubusercontent.com/JohnnyJimJams/deframework/master/TODO.txt
 
