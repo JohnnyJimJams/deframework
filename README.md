@@ -7,6 +7,8 @@ This is an editor to create unrestricted file size demos for the demoscene.
 
 # Building
 
+* Build as x86 only, x64 is not set up yet.
+
 It contains all dependencies, should build out of the box with MS Visual Studio 2017 Community.
 
 # Code design
