@@ -4,8 +4,9 @@ Animation::Animation()
 {
 }
 
-Animation::Animation(void *p_property, KeyframePropertyType p_type)
+Animation::Animation(std::string p_id, void *p_property, KeyframePropertyType p_type)
 {
+	id = p_id;
 	property = p_property;
 	type = p_type;
 }
@@ -285,4 +286,9 @@ std::vector<Keyframe> Animation::GetKeyframes()
 KeyframePropertyType Animation::GetType()
 {
 	return type;
+}
+
+bool Animation::compareProperty(std::string prop)
+{
+	return prop == id;
 }

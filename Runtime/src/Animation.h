@@ -1,12 +1,13 @@
 #pragma once
 #include "Keyframe.h"
 #include <vector>
+#include <string>
 
 class Animation
 {
 public:
 	Animation();
-	Animation(void *p_property, KeyframePropertyType p_type);
+	Animation(std::string p_id, void *p_property, KeyframePropertyType p_type);
 	bool EvaluateBool(double time, bool updateProperty = true);
 	int EvaluateInt(double time, bool updateProperty = true);
 	float EvaluateFloat(double time, bool updateProperty = true);
@@ -15,7 +16,9 @@ public:
 	void DeleteKeyframe(int index);
 	std::vector<Keyframe> GetKeyframes();
 	KeyframePropertyType GetType();
+	bool compareProperty(std::string prop);
 private:
+	std::string id;	// EntityName.PropertyName
 	std::vector<Keyframe> keyframes;
 	void *property;
 	KeyframePropertyType type;

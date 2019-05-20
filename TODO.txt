@@ -1,12 +1,17 @@
+ - Key scale
+ - Key and slerping for Quaternions
+ - Add concept of demo camera and editor camera
+ - Show editor camera (above layers) and Monkey Entity in layer
 NOTES
 =====
 * All Initialization to happen at the start of the demo, this means scrubbing will work without issues.
 
 TODO!
 =====
- - Material File format (.mat) Shader (filename), Textur2D (filename)
+ - Material File format (.mat) Shader (filename), Texture2D (filename)
  - Assets (Meshes, Textures, Materials, Shaders)
-   - Demo needs to load, use and reference.
+   - Demo needs to load from memory, use and reference.  No changes, no error checking.
+   - Editor needs all the above including grouping, changes, error checking, file path loading, saving.
  - Create EImage
  - Create ELight
 
@@ -112,3 +117,6 @@ glTF
  - Entities - Name, Type, Transform, Active, Children, Parent
  - Entity Abstract Base Class
  - Create EMesh
+
+ - Change background colour for keyed values
+ - Serialize keyed values with Text identifier - EntityName.Property

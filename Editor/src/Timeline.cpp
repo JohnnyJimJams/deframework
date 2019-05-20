@@ -47,6 +47,7 @@ void Timeline::TickUI(bool* p_open)
 
 			float mousex01 = (ImGui::GetIO().MousePos.x - canvas_pos.x) / (float)(right - left);
 			editor->SetMusicSeconds(editor->GetMusicSecondsTotal() * mousex01);
+			editor->GetDemo()->Tick(editor->GetMusicSecondsNow());
 			//editor->GetConsole()->Log("set music time: %f\n", pos);
 		}
 	}

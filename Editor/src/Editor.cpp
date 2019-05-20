@@ -36,10 +36,7 @@ void Editor::Start()
 	// OpenGL loader
 	gl3wInit();
 
-	// Audio!
-	audio = new Mp3();
-	audio->Load(L"..\\Editor\\resources\\TDIME.mp3");
-	m_demo = new Demo(m_width, m_height);
+	m_demo = new Demo(m_width, m_height, L"..\\Editor\\resources\\TDIME.mp3");
 	m_console = new Console(this);
 	m_toolbar = new Toolbar(this);
 	m_timeline = new Timeline(this);
@@ -83,6 +80,7 @@ void Editor::Start()
 
 		ImGui::ShowDemoWindow(&show_demo_window);
 		TickUI();
+		if (m_mode == EditorMode::Play) m_demo->Tick(m_demo->GetMusicSecondsNow());
 
 		// Rendering
 		ImGui::Render();
@@ -136,16 +134,16 @@ void Editor::Play()
 	if (m_mode == EditorMode::Play)
 	{
 		__int64 start = 0;
-		__int64 end = audio->GetDuration();
+		__int64 end = m_demo->GetAudio()->GetDuration();
 
-		audio->SetPositions(&start, &end, true);
+		m_demo->GetAudio()->SetPositions(&start, &end, true);
 		m_console->Log("Restart\n");
 		return;
 	}
 	if ( m_mode == EditorMode::Edit)
 	{
 		m_mode = EditorMode::Play;
-		audio->Play();
+		m_demo->GetAudio()->Play();
 		m_console->Log("Play from current position\n");
 		return;
 	}
@@ -156,7 +154,7 @@ void Editor::Stop()
 	if (m_mode == EditorMode::Play)
 	{
 		m_mode = EditorMode::Edit;
-		audio->Stop();
+		m_demo->GetAudio()->Stop();
 		m_console->Log("Stop\n");
 		return;
 	}
@@ -164,20 +162,20 @@ void Editor::Stop()
 
 double Editor::GetMusicSecondsNow()
 {
-	return audio->GetCurrentPosition() / 10000000.0;
+	return m_demo->GetMusicSecondsNow();
 }
 
 void Editor::SetMusicSeconds(double time)
 {
 	__int64 start =(__int64) (time * 10000000.0);
-	__int64 end = audio->GetDuration();
+	__int64 end = m_demo->GetAudio()->GetDuration();
 
-	audio->SetPositions(&start, &end, true);
+	m_demo->GetAudio()->SetPositions(&start, &end, true);
 }
 
 double Editor::GetMusicSecondsTotal()
 {
-	return audio->GetDuration() / 10000000.0;
+	return m_demo->GetMusicSecondsTotal();
 }
 
 Console * Editor::GetConsole()

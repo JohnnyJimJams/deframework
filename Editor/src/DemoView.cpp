@@ -82,7 +82,7 @@ void DemoView::TickUI(bool* p_open)
 			glUniformMatrix4fv(m_shaderDefault->GetUniform("view"), 1, GL_FALSE, value_ptr(View));
 			glUniformMatrix4fv(m_shaderDefault->GetUniform("projection"), 1, GL_FALSE, value_ptr(Projection));
 
-			m_emesh->GetMesh()->Draw();
+			if (m_emesh->Active) m_emesh->GetMesh()->Draw();
 
 			glDisable(GL_DEPTH_TEST);
 		m_shaderDefault->Unbind();

@@ -3,7 +3,6 @@
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include <stdio.h>
-#include "MP3.h"
 #include "Console.h"
 #include "Toolbar.h"
 #include "Timeline.h"
@@ -28,15 +27,17 @@ public:
 	void SetBackgroundColor(float r, float g, float b);
 	unsigned int GetWidth();
 	unsigned int GetHeight();
+
+	Console *GetConsole();
+	CurveEditor *GetCurveEditor();
+	Demo *GetDemo();
+	PropertyEditor *GetPropertyEditor() { return m_propertyeditor; }
+
 	void Play();
 	void Stop();
 	double GetMusicSecondsNow();
 	void SetMusicSeconds(double time);
 	double GetMusicSecondsTotal();
-	Console *GetConsole();
-	CurveEditor *GetCurveEditor();
-	Demo *GetDemo();
-	PropertyEditor *GetPropertyEditor() { return m_propertyeditor; }
 
 private:
 	GLFWwindow* m_window;
@@ -54,7 +55,6 @@ private:
 	unsigned int m_width;
 	unsigned int m_height;
 	GLfloat m_backgroundColor[3] = { .02f, .02f, 0.05f };
-	Mp3 *audio;
 	EditorMode m_mode;
 	void TickUI();
 

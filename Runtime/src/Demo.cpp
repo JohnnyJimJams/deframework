@@ -4,11 +4,14 @@
 
 using namespace std;
 
-Demo::Demo(unsigned int width, unsigned int height)
+Demo::Demo(unsigned int width, unsigned int height, LPCWSTR musicPath)
 {
 	m_width = width;
 	m_height = height;
 	PrepareFullScreenQuad();
+	// Audio!
+	audio = new Mp3();
+	audio->Load(musicPath);
 }
 
 Demo::~Demo()
@@ -21,6 +24,17 @@ Demo::~Demo()
 		delete(t.second);
 	for (auto s : m_shaders)
 		delete(s.second);
+}
+
+void Demo::Tick(double time)
+{
+	for (auto a : Animations)
+	{
+		if (a.GetType() == KeyframePropertyType::BOOL_VAL) a.EvaluateBool(time);
+		if (a.GetType() == KeyframePropertyType::INT_VAL) a.EvaluateInt(time);
+		if (a.GetType() == KeyframePropertyType::FLOAT_VAL) a.EvaluateFloat(time);
+		if (a.GetType() == KeyframePropertyType::DOUBLE_VAL) a.EvaluateDouble(time);
+	}
 }
 
 unsigned int Demo::GetWidth()
@@ -283,6 +297,39 @@ std::string Demo::GetShaderName(ShaderProgram * shader)
 	for (auto s : m_shaders)
 		if (s.second == shader) return s.first;
 	return std::string();
+}
+
+Mp3* Demo::GetAudio()
+{
+	return audio;
+}
+
+double Demo::GetMusicSecondsNow()
+{
+	return audio->GetCurrentPosition() / 10000000.0;
+}
+
+double Demo::GetMusicSecondsTotal()
+{
+	return audio->GetDuration() / 10000000.0;
+}
+
+bool Demo::IsKeyed(std::string prop)
+{
+	bool result = false;
+
+	for (auto a : Animations)
+		if (a.compareProperty(prop)) return true;
+
+	return result;
+}
+
+Animation* Demo::AnimationByID(std::string id)
+{
+	for (auto &a : Animations)
+		if (a.compareProperty(id)) return &a;
+
+	return nullptr;
 }
 
 void Demo::RemoveTexture2D(std::string texToRemove)

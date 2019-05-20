@@ -8,6 +8,8 @@
 #include "Material.h"
 #include "ShaderProgram.h"
 #include "Mesh.h"
+#include "Animation.h"
+#include "MP3.h"
 
 #include <vector>
 #include <map>
@@ -16,9 +18,10 @@
 class Demo
 {
 public:
-	Demo(unsigned int width, unsigned int height);
+	Demo(unsigned int width, unsigned int height, LPCWSTR musicPath);
 	virtual ~Demo();
 
+	void Tick(double time);
 	unsigned int GetWidth();
 	unsigned int GetHeight();
 	void DrawFullScreenQuad();
@@ -59,6 +62,16 @@ public:
 	std::map<std::string, ShaderProgram *> &GetShaders() { return m_shaders; }
 	std::string GetShaderName(ShaderProgram *shader);
 
+	std::vector<Animation> Animations;
+	
+	Mp3* GetAudio();
+	void Play();
+	void Stop();
+	double GetMusicSecondsNow();
+	double GetMusicSecondsTotal();
+	bool IsKeyed(std::string prop);
+	Animation* AnimationByID(std::string id);
+
 private:
 	unsigned int m_width;
 	unsigned int m_height;
@@ -73,6 +86,7 @@ private:
 	std::map<std::string, Mesh *> m_meshes;
 
 	void PrepareFullScreenQuad();
+	Mp3* audio;
 
 };
 
