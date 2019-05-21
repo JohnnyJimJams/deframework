@@ -158,10 +158,10 @@ float Animation::EvaluateFloat(double time, bool updateProperty)
 								else
 									KC = &keyframes[i + 1];
 
-								result = (float)(0.5f * ((2 * KA->value.floatValue) + 
+								result = (float)(0.5f * ((2.0f * KA->value.floatValue) + 
 									(KB->value.floatValue - KZ->value.floatValue) * t + 
-									(2 * KZ->value.floatValue - 5 * KA->value.floatValue + 4 * KB->value.floatValue - KC->value.floatValue) * t * t + 
-									(3 * KA->value.floatValue - KZ->value.floatValue - 3 * KB->value.floatValue + KC->value.floatValue) * t * t * t));
+									(2.0f * KZ->value.floatValue - 5.0f * KA->value.floatValue + 4.0f * KB->value.floatValue - KC->value.floatValue) * t * t + 
+									(3.0f * KA->value.floatValue - KZ->value.floatValue - 3.0f * KB->value.floatValue + KC->value.floatValue) * t * t * t));
 							}
 
 						}
@@ -238,6 +238,147 @@ double Animation::EvaluateDouble(double time, bool updateProperty)
 
 	if (updateProperty) *(double *)property = result;
 	return result;
+}
+
+glm::vec3 Animation::EvaluateVec3(double time, bool updateProperty)
+{
+	if (keyframes.size() == 0) return glm::vec3(); // no keyframes, bail without updating property, return value is a dummy value
+
+	glm::vec3 result = glm::vec3();
+	if (keyframes.size() == 1)
+		result = keyframes[0].value.vec3Value; // Only one keyframe, just return it
+	else
+		if (keyframes[0].time >= time)
+			result = keyframes[0].value.vec3Value; // evaluation time is before the first keyframe, return first keyframe
+		else
+			if (keyframes[keyframes.size() - 1].time <= time)
+				result = keyframes[keyframes.size() - 1].value.vec3Value; // evaluation time is after the last keyframe, return last keyframe
+			else
+			{
+				for (unsigned int i = 1; i < keyframes.size(); i++)
+				{
+					// check if value falls between keyframes[i].time and keyframes[i+1]
+					if (time < keyframes[i].time)
+					{
+						Keyframe* KA = &keyframes[i - 1];
+						if (KA->interpolation == KeyframeInterpolationType::CONSTANT)
+						{
+							// Constant
+							result = KA->value.vec3Value;
+						}
+						else
+						{
+							Keyframe* KB = &keyframes[i];
+							double length = KB->time - KA->time;
+							float t = (time - KA->time) / length;
+							if (KA->interpolation == KeyframeInterpolationType::LINEAR)
+							{
+								// Linear
+								glm::vec3 valueLength = KB->value.vec3Value - KA->value.vec3Value;
+								result = (glm::vec3)(KA->value.vec3Value + valueLength * t);
+							}
+							else
+							{
+								// Curved
+								Keyframe* KZ, * KC;
+								if (((int)i - 2) == -1)
+									KZ = &keyframes[i - 1];
+								else
+									KZ = &keyframes[i - 2];
+
+								if (i + 1 == keyframes.size())
+									KC = &keyframes[i];
+								else
+									KC = &keyframes[i + 1];
+
+								result = (glm::vec3)(0.5f * ((2.0f * KA->value.vec3Value) +
+									(KB->value.vec3Value - KZ->value.vec3Value) * t +
+									(2.0f * KZ->value.vec3Value - 5.0f * KA->value.vec3Value + 4.0f * KB->value.vec3Value - KC->value.vec3Value) * t * t +
+									(3.0f * KA->value.vec3Value - KZ->value.vec3Value - 3.0f * KB->value.vec3Value + KC->value.vec3Value) * t * t * t));
+							}
+
+						}
+						break;
+					}
+				}
+			}
+
+	if (updateProperty) * (glm::vec3*)property = result;
+	return result;
+}
+
+glm::quat Animation::EvaluateQuat(double time, bool updateProperty)
+{
+	if (keyframes.size() == 0) return glm::quat(); // no keyframes, bail without updating property, return value is a dummy value
+
+	glm::quat result = glm::quat();
+	if (keyframes.size() == 1)
+		result = keyframes[0].value.quatValue; // Only one keyframe, just return it
+	else
+		if (keyframes[0].time >= time)
+			result = keyframes[0].value.quatValue; // evaluation time is before the first keyframe, return first keyframe
+		else
+			if (keyframes[keyframes.size() - 1].time <= time)
+				result = keyframes[keyframes.size() - 1].value.quatValue; // evaluation time is after the last keyframe, return last keyframe
+			else
+			{
+				for (unsigned int i = 1; i < keyframes.size(); i++)
+				{
+					// check if value falls between keyframes[i].time and keyframes[i+1]
+					if (time < keyframes[i].time)
+					{
+						Keyframe* KA = &keyframes[i - 1];
+						if (KA->interpolation == KeyframeInterpolationType::CONSTANT)
+						{
+							// Constant
+							result = KA->value.quatValue;
+						}
+						else
+						{
+							Keyframe* KB = &keyframes[i];
+							double length = KB->time - KA->time;
+							float t = (time - KA->time) / length;
+							if (KA->interpolation == KeyframeInterpolationType::LINEAR)
+							{
+								// Linear
+								result = glm::slerp(KA->value.quatValue, KB->value.quatValue, t);
+							}
+							else
+							{
+								// Curved - Squad!
+								Keyframe* KZ, * KC;
+								if (((int)i - 2) == -1)
+									KZ = &keyframes[i - 1];
+								else
+									KZ = &keyframes[i - 2];
+
+								if (i + 1 == keyframes.size())
+									KC = &keyframes[i];
+								else
+									KC = &keyframes[i + 1];
+
+								/*
+								result = (glm::quat)(0.5f * ((2.0f * KA->value.quatValue) +
+									(KB->value.quatValue - KZ->value.quatValue) * t +
+									(2.0f * KZ->value.quatValue - 5.0f * KA->value.quatValue + 4.0f * KB->value.quatValue - KC->value.quatValue) * t * t +
+									(3.0f * KA->value.quatValue - KZ->value.quatValue - 3.0f * KB->value.quatValue + KC->value.quatValue) * t * t * t));
+
+								*/
+								// SQUAD!
+								glm::quat s1 = glm::intermediate(KZ->value.quatValue, KA->value.quatValue, KB->value.quatValue);
+								glm::quat s2 = glm::intermediate(KA->value.quatValue, KB->value.quatValue, KC->value.quatValue);
+								result = glm::squad(KA->value.quatValue, KB->value.quatValue, s1, s2, t);
+							}
+
+						}
+						break;
+					}
+				}
+			}
+
+	if (updateProperty) * (glm::quat*)property = result;
+	return result;
+
 }
 
 int Animation::InsertKeyframe(Keyframe k)

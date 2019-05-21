@@ -1,7 +1,6 @@
- - Key scale
- - Key and slerping for Quaternions
  - Add concept of demo camera and editor camera
  - Show editor camera (above layers) and Monkey Entity in layer
+
 NOTES
 =====
 * All Initialization to happen at the start of the demo, this means scrubbing will work without issues.
@@ -120,3 +119,7 @@ glTF
 
  - Change background colour for keyed values
  - Serialize keyed values with Text identifier - EntityName.Property
+ - Key scale
+ - Key and Evaluate for Vec3
+ - Key and slerping for Quaternions
+ - Quaternion Squad

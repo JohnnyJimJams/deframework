@@ -43,3 +43,21 @@ Keyframe::Keyframe(double pTime, double pDoubleValue, KeyframeInterpolationType 
 	in = pHandleIn;
 	out = pHandleOut;
 }
+
+Keyframe::Keyframe(double ptime, glm::vec3 pVec3Value, KeyframeInterpolationType pInterpolation, KeyframeHandle pHandleIn, KeyframeHandle pHandleOut)
+{
+	time = ptime;
+	value.vec3Value = pVec3Value;
+	interpolation = pInterpolation;
+	in = pHandleIn;
+	out = pHandleOut;
+}
+
+Keyframe::Keyframe(double ptime, glm::quat pQuatValue, KeyframeInterpolationType pInterpolation, KeyframeHandle pHandleIn, KeyframeHandle pHandleOut)
+{
+	time = ptime;
+	value.quatValue = pQuatValue;
+	interpolation = pInterpolation;
+	in = pHandleIn;
+	out = pHandleOut;
+}

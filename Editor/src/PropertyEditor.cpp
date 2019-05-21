@@ -47,42 +47,57 @@ void PropertyEditor::TickUI(bool* p_open)
 			if (ImGui::BeginPopupContextItem("Active context menu", 1)) {
 				if (ImGui::Selectable("Active: Add KeyFrame"))
 				{
-					if (!isKeyed)
-					{
-						editor->GetDemo()->Animations.push_back(Animation(e->Name + ".Active", (void*)&e->Active, KeyframePropertyType::BOOL_VAL));
-					}
+					if (!isKeyed) editor->GetDemo()->Animations.push_back(Animation(e->Name + ".Active", (void*)&e->Active, KeyframePropertyType::BOOL_VAL));
 					editor->GetDemo()->AnimationByID(e->Name + ".Active")->InsertKeyframe(Keyframe(editor->GetMusicSecondsNow(), e->Active, KeyframeInterpolationType::CONSTANT));
 				}
 				//if (ImGui::Selectable("Delete Keyframe: Active at this time")) e->Active = false;
 				ImGui::EndPopup();
 			}
 
-			isKeyed = editor->GetDemo()->IsKeyed(e->Name + ".Position.x");
+			isKeyed = editor->GetDemo()->IsKeyed(e->Name + ".Position");
 			if (isKeyed) StyleAsKeyed();
 			ImGui::SliderFloat3("Position", (float*)&e->Position, -10.0f, 10.0f);
 			if (isKeyed) ImGui::PopStyleColor(2);
 			if (ImGui::BeginPopupContextItem("Position context menu", 1)) {
 				if (ImGui::Selectable("Position: Add KeyFrame"))
 				{
-					if (!isKeyed)
-					{
-						editor->GetDemo()->Animations.push_back(Animation(e->Name + ".Position.x", (void*)& e->Position.x, KeyframePropertyType::FLOAT_VAL));
-						editor->GetDemo()->Animations.push_back(Animation(e->Name + ".Position.y", (void*)& e->Position.y, KeyframePropertyType::FLOAT_VAL));
-						editor->GetDemo()->Animations.push_back(Animation(e->Name + ".Position.z", (void*)& e->Position.z, KeyframePropertyType::FLOAT_VAL));
-					}
-					editor->GetDemo()->AnimationByID(e->Name + ".Position.x")->InsertKeyframe(Keyframe(editor->GetMusicSecondsNow(), e->Position.x, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
-					editor->GetDemo()->AnimationByID(e->Name + ".Position.y")->InsertKeyframe(Keyframe(editor->GetMusicSecondsNow(), e->Position.y, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
-					editor->GetDemo()->AnimationByID(e->Name + ".Position.z")->InsertKeyframe(Keyframe(editor->GetMusicSecondsNow(), e->Position.z, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+					if (!isKeyed) editor->GetDemo()->Animations.push_back(Animation(e->Name + ".Position", (void*)& e->Position, KeyframePropertyType::VEC3_VAL));
+					editor->GetDemo()->AnimationByID(e->Name + ".Position")->InsertKeyframe(Keyframe(editor->GetMusicSecondsNow(), e->Position, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
 				}
 				//if (ImGui::Selectable("Delete Keyframe: Active at this time")) e->Active = false;
 				ImGui::EndPopup();
 			}
 
-
+			isKeyed = editor->GetDemo()->IsKeyed(e->Name + ".Rotation");
+			if (isKeyed) StyleAsKeyed();
 			glm::vec3 euler = degrees(e->GetEulerAngles());
 			ImGui::SliderFloat3("Rotation", (float *)&euler, -179.999f, 179.999f);
 			e->SetEulerAngles(radians(euler));
+			if (isKeyed) ImGui::PopStyleColor(2);
+			if (ImGui::BeginPopupContextItem("Rotation context menu", 1)) {
+				if (ImGui::Selectable("Rotation: Add KeyFrame"))
+				{
+					if (!isKeyed) editor->GetDemo()->Animations.push_back(Animation(e->Name + ".Rotation", (void*)& e->Rotation, KeyframePropertyType::QUAT_VAL));
+					editor->GetDemo()->AnimationByID(e->Name + ".Rotation")->InsertKeyframe(Keyframe(editor->GetMusicSecondsNow(), e->Rotation, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+				}
+				//if (ImGui::Selectable("Delete Keyframe: Active at this time")) e->Active = false;
+				ImGui::EndPopup();
+			}
+
+			isKeyed = editor->GetDemo()->IsKeyed(e->Name + ".Scale");
+			if (isKeyed) StyleAsKeyed();
 			ImGui::SliderFloat3("Scale", (float*)&e->Scale, -10.0f, 10.0f);
+			if (isKeyed) ImGui::PopStyleColor(2);
+			if (ImGui::BeginPopupContextItem("Scale context menu", 1)) {
+				if (ImGui::Selectable("Scale: Add KeyFrame"))
+				{
+					if (!isKeyed) editor->GetDemo()->Animations.push_back(Animation(e->Name + ".Scale", (void*)& e->Scale, KeyframePropertyType::VEC3_VAL));
+					editor->GetDemo()->AnimationByID(e->Name + ".Scale")->InsertKeyframe(Keyframe(editor->GetMusicSecondsNow(), e->Scale, KeyframeInterpolationType::CURVED, KeyframeHandle(), KeyframeHandle()));
+				}
+				//if (ImGui::Selectable("Delete Keyframe: Active at this time")) e->Active = false;
+				ImGui::EndPopup();
+			}
+
 			ImGui::Separator();
 		}
 	}

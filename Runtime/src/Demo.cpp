@@ -34,6 +34,8 @@ void Demo::Tick(double time)
 		if (a.GetType() == KeyframePropertyType::INT_VAL) a.EvaluateInt(time);
 		if (a.GetType() == KeyframePropertyType::FLOAT_VAL) a.EvaluateFloat(time);
 		if (a.GetType() == KeyframePropertyType::DOUBLE_VAL) a.EvaluateDouble(time);
+		if (a.GetType() == KeyframePropertyType::VEC3_VAL) a.EvaluateVec3(time);
+		if (a.GetType() == KeyframePropertyType::QUAT_VAL) a.EvaluateQuat(time);
 	}
 }
 
